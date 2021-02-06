@@ -1,26 +1,12 @@
 import React, { useEffect, useContext } from 'react';
 import { AlbumContext } from '../../context/AlbumProvider';
 import AlbumCard from './AlbumCard/AlbumCard';
-import ApiService from '../../services/api.service';
 import './SearchBody.css';
 
 // This will hold the album cards
-const SearchBody = () => {
+const SearchBody = ({ album }) => {
 
-    const [album, setAlbums] = useContext(AlbumContext);
-
-    useEffect(() => {
-
-        const getAlbums = async () => {
-            const albumsJson = await ApiService.getAlAlbums();
-            setAlbums(albumsJson);
-        }
-
-        getAlbums();
-
-    }, []);
-
-    if(album.owned_Albums === undefined){
+    if(album === undefined){
         return(
             <div>oops</div>
         );
@@ -28,8 +14,8 @@ const SearchBody = () => {
     else{
         return(
             <div className="searchbody-container">
-                {album.owned_Albums.map((dBalbum) => {
-                    return <AlbumCard album={dBalbum} />
+                {album.map((dBalbum, index) => {
+                    return <AlbumCard album={dBalbum} key={index} />
                 })}
             </div>
         );

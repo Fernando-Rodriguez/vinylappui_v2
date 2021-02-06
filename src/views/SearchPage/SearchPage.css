@@ -1,9 +1,9 @@
 .search-page-container {
     width: 100%;
     height: 100%;
-    background: blue;
+    background: transparent;
     display: grid;
-    grid-template-columns: 1fr 4fr;
+    grid-template-columns: 1fr 5fr;
     grid-template-rows: 1fr 10fr 0.5fr;
 }
 
@@ -17,13 +17,13 @@
 .search-page-body {
     grid-column: 2;
     grid-row: 2;
-    background: green;
+    background: rgb(20, 17, 17);
 }
 
 .search-page-searchbar {   
     grid-row: 1;
     grid-column: 2;
-    background: blue;
+    background: transparent;
 }
 
 .search-page-footer {

@@ -1,36 +1,43 @@
-import React, { useContext } from 'react';
-import {
-    useHistory,
-    useLocation
-} from 'react-router-dom';
+import React, { useContext, useState } from 'react';
 import { UserContext } from '../../context/UserProvider';
+import TextInput from '../components/TextInput';
+import Button from '../components/Button';
+import './Login.css';
 
 const Login = () => {
 
-    const [user, setUser] = useContext(UserContext);
-    let history = useHistory();
-    let location = useLocation();
+    const [token, SignInHandler, SignOutHandler] = useContext(UserContext);
+    const [userInput, setUserInput] = useState();
+    const [passInput, setPassInput] = useState();
 
-    let { from } = location.state || { from: { pathname: "/" } };
+    const LoginThing =  async() => {
+        await SignInHandler(userInput, passInput);
+        setPassInput("");
+        setUserInput("");
+    }
 
-      const Logout = () => {
+    const onUserChangeHandler = (value) => {
+        setUserInput(value);
+    }
 
-        const updatedUser = {
-            isLoggedIn: true,
-            userName: user.userName,
-            userImg: user.userImg,
-        }
-
-        setUser(
-            updatedUser
-        );
-
-        history.replace(from);
+    const onPassChange = (value) => {
+        setPassInput(value);
     }
 
     return(
-        <div>
-            <button onClick={Logout}>click</button>
+        <div className="login-container">
+            <div className="side-bar-container">
+                <img src="" alt=""/>
+            </div>
+            <div className="login-input-container">
+                <TextInput 
+                    onChangeHandler={onUserChangeHandler}
+                    placeholder="enter username" />
+                <TextInput 
+                    onChangeHandler={onPassChange}
+                    placeholder="enter password" />
+                <Button clickHandler={LoginThing} >Sign In</Button>
+            </div>
         </div>
     );
 }

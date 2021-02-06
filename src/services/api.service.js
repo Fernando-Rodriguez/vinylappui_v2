@@ -1,21 +1,61 @@
 const ApiService = {
-    getAlAlbums: async () => {
 
-        const myHeaders = new Headers();
+  getAlAlbums: async (token) => {
 
-        myHeaders.append("Authorization", "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiRnJvZDA4MCIsInVzZXJfc2VjcmV0IjoidGVzdHBhc3MiLCJuYmYiOjE2MTIyMTk0MTAsImV4cCI6MTYxMjIyMzAxMCwiaWF0IjoxNjEyMjE5NDEwfQ.Q5b8sAKK8FihfCwJzQbOFX8aBM5UdCK13ODGKMSjfHk");
+    let myHeaders = new Headers();
+
+    myHeaders.append(
+      "Authorization",
+      `Bearer ${token}`
+    );
+
+    const requestOptions = {
+      method: "GET",
+      headers: myHeaders,
+      redirect: "follow",
+    };
+
+    const data = await fetch(
+      `${process.env.REACT_APP_API_BASE}/ownedalbums`,
+      requestOptions
+    );
+
+    const dataInJson = await data.json();
+
+    return dataInJson;
+  },
+
+  getToken: async (email, password) => {
+
+    const myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+
+    const raw = JSON.stringify(
+    {
+        "clientname": email,
+        "clientsecret": password
+    });
+
+    const requestOptions = {
+        method: 'POST',
+        headers: myHeaders,
+        body: raw,
+        redirect: 'follow'
+    };
+
+    const response = await fetch(`${process.env.REACT_APP_API_BASE}/token`, requestOptions);
+
+    if(response.ok){
+      const token = await response.json();
+
+      if(token.access_token){
+
+        return token.access_token;
         
-        const requestOptions = {
-          method: 'GET',
-          headers: myHeaders,
-          redirect: 'follow'
-        };
-        
-        const data = await fetch("https://familyvinylapp.azurewebsites.net/api/ownedalbums", requestOptions);
-        const dataInJson = await data.json();
+      }
+  }
 
-        return dataInJson;
-    }
-}
+  }
+};
 
 export default ApiService;

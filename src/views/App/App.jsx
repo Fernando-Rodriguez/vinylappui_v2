@@ -1,51 +1,36 @@
 import './App.css';
-import React, { useContext } from "react";
+import React from "react";
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
-  Redirect,
-  BrowserRouter
+  Route  
 } from "react-router-dom";
 import SearchPage from '../SearchPage/SearchPage';
-import UserProvider, { UserContext } from '../../context/UserProvider';
+import UserProvider from '../../context/UserProvider';
+import AlbumProvider from '../../context/AlbumProvider';
+import PrivateRoute from '../routes/PrivateRoute';
 import Login from '../Login/Login';
 
-function PrivateRoute({ children, ...rest }) {
-
-  const [user, setUser] = useContext(UserContext);
-
-  return (
-    <Route
-      {...rest}
-      render={({ location }) =>
-        user.isLoggedIn ? (children) : (
-          <Redirect
-            to={{
-              pathname: "/login",
-              state: { from: location }}}
-          />
-        )
-      }
-    />
-  );
-}
-
-function App() {
+const App = () => { 
   return (
     <div className="App">
-      <UserProvider>
-        <BrowserRouter >
-          <Switch>
-            <Route path='/login'>
-              <Login />
-            </Route>
-            <PrivateRoute path='/' exact>
-                <SearchPage />          
-            </PrivateRoute>
-          </Switch>
-        </BrowserRouter>
-      </UserProvider>
+       <Router >
+        <UserProvider>
+         <AlbumProvider>
+            <Switch>
+              <Route path='/login'>
+                <Login />
+              </Route>
+              <PrivateRoute path='/' exact>
+                  <SearchPage />          
+              </PrivateRoute>
+              <PrivateRoute path='/search' exact>
+                <div>this'll be stuff</div>
+              </PrivateRoute>
+            </Switch>
+          </AlbumProvider>
+          </UserProvider>
+      </Router>
     </div>
   );
 }
