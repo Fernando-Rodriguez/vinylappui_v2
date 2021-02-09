@@ -8,5 +8,6 @@
 .custom-button {
     width: 100px;
     height: 100px;
-    color: black;
+    color: yellow;
+    background-color: orange;
 }

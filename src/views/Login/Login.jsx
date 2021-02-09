@@ -9,9 +9,12 @@ const Login = () => {
     const [token, SignInHandler, SignOutHandler] = useContext(UserContext);
     const [userInput, setUserInput] = useState();
     const [passInput, setPassInput] = useState();
+    const [isLoading, setIsLoading] = useState(false);
 
     const LoginThing =  async() => {
+        setIsLoading(true);
         await SignInHandler(userInput, passInput);
+        setIsLoading(false);
         setPassInput("");
         setUserInput("");
     }
@@ -24,19 +27,36 @@ const Login = () => {
         setPassInput(value);
     }
 
-    return(
-        <div className="login-container">
-            <div className="side-bar-container">
-                <img src="" alt=""/>
-            </div>
-            <div className="login-input-container">
+    const LoginSection = () => {
+        return(
+            <div className="input-items">
+                <h2>Login!</h2>
                 <TextInput 
                     onChangeHandler={onUserChangeHandler}
                     placeholder="enter username" />
                 <TextInput 
                     onChangeHandler={onPassChange}
                     placeholder="enter password" />
-                <Button clickHandler={LoginThing} >Sign In</Button>
+                <button onClick={LoginThing} >Sign In</button>
+            </div>
+        );
+    };
+
+    const LoadingSection = () => {
+        return(
+            <div className="input-items">
+                <h1>Loading...</h1>
+            </div>
+        )
+    }
+
+    return(
+        <div className="login-container">
+            <div className="side-bar-container">
+                <img src="" alt=""/>
+            </div>
+            <div className="login-input-container">
+                {isLoading ? LoadingSection() : LoginSection()}
             </div>
         </div>
     );

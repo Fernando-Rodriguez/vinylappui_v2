@@ -4,12 +4,12 @@ import { UserContext } from '../../context/UserProvider';
 
 const PrivateRoute = ({ children, ...rest }) => {
 
-    const [isLoggedIn] = useContext(UserContext);
+    const [token] = useContext(UserContext);
 
     return (
         <Route
         {...rest}
-        render={({ location }) => isLoggedIn ? (children) : (
+        render={({ location }) => token ? (children) : (
             <Redirect
                 to={{
                 pathname: "/login",

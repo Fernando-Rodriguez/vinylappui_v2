@@ -1,11 +1,12 @@
 import React, { createContext, useState } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
-import ApiService from '../services/api.service';
+import TokenService from '../services/token.service';
+import UserService from '../services/user.service';
 export const UserContext = createContext();
 
 export const UserProvider = (props) => {
 
-    const existingToken = localStorage.getItem("token");
+    const existingToken = TokenService.getToken();
     const [token, setToken] = useState(existingToken);
 
     let history = useHistory();
@@ -13,19 +14,15 @@ export const UserProvider = (props) => {
     let { from } = location.state || { from: { pathname: "/" } };
 
     const SignInHandler = async (email, password) => {
-
         if(!token){
-
-            const newToken = await ApiService.getToken(email, password);
-
-            localStorage.setItem("token", newToken);
-            await setToken(newToken);
+            const userToken = await UserService.login(email, password);
+            await setToken(userToken);
             history.replace(from);
         }
     };
 
     const SignOutHandler = () => {
-        localStorage.removeItem("token");
+        TokenService.removeToken();
         setToken(null);
     }
 

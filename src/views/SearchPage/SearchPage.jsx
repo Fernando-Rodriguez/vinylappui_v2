@@ -1,13 +1,18 @@
 import React, { useContext, useEffect, useState } from 'react';
+
 import MainFooter from '../MainFooter/MainFooter';
 import NavBar from '../NavBar/NavBar';
 import SearchBody from '../SearchBody/SearchBody';
-import './SearchPage.css';
 import SearchBar from '../SearchBar/SearchBar';
-import ApiService from '../../services/api.service';
+
+import VinylApiService from '../../services/vinylApiService';
+
 import { AlbumContext } from '../../context/AlbumProvider';
 import { UserContext } from '../../context/UserProvider';
+
 import { debounce1 } from '../../services/utilities';
+
+import './SearchPage.css';
 
 // This will work as the main container for the searchpage.
 const SearchPage = () => {
@@ -18,8 +23,9 @@ const SearchPage = () => {
 
     useEffect(() => {
         const getAlbums = async () => {
-            const albumsJson = await ApiService.getAlAlbums(token);
-            setAlbums(albumsJson.owned_Albums);
+            //const albumsJson = await ApiService.getAlAlbums(token);
+            const albums = await VinylApiService.getDataAsync();
+            setAlbums(albums);
         }
         getAlbums();
     }, []);
@@ -62,6 +68,6 @@ const SearchPage = () => {
             </div>
         </div>
     );
-}
+};
 
 export default SearchPage;

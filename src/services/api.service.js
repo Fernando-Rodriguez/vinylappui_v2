@@ -1,61 +1,63 @@
-const ApiService = {
+// This service has been replaced by vinylApiService. It was taken from 
+// the original version of the app.
 
-  getAlAlbums: async (token) => {
+// const ApiService = {
 
-    let myHeaders = new Headers();
+//   getAlAlbums: async (token) => {
 
-    myHeaders.append(
-      "Authorization",
-      `Bearer ${token}`
-    );
+//     let myHeaders = new Headers();
 
-    const requestOptions = {
-      method: "GET",
-      headers: myHeaders,
-      redirect: "follow",
-    };
+//     myHeaders.append(
+//       "Authorization",
+//       `Bearer ${token}`
+//     );
 
-    const data = await fetch(
-      `${process.env.REACT_APP_API_BASE}/ownedalbums`,
-      requestOptions
-    );
+//     const requestOptions = {
+//       method: "GET",
+//       headers: myHeaders,
+//       redirect: "follow",
+//     };
 
-    const dataInJson = await data.json();
+//     const data = await fetch(
+//       `${process.env.REACT_APP_API_BASE}/ownedalbums`,
+//       requestOptions
+//     );
 
-    return dataInJson;
-  },
+//     const dataInJson = await data.json();
 
-  getToken: async (email, password) => {
+//     return dataInJson;
+//   },
 
-    const myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
+//   getToken: async (email, password) => {
 
-    const raw = JSON.stringify(
-    {
-        "clientname": email,
-        "clientsecret": password
-    });
+//     const myHeaders = new Headers();
+//     myHeaders.append("Content-Type", "application/json");
 
-    const requestOptions = {
-        method: 'POST',
-        headers: myHeaders,
-        body: raw,
-        redirect: 'follow'
-    };
+//     const raw = JSON.stringify(
+//     {
+//         "clientname": email,
+//         "clientsecret": password
+//     });
 
-    const response = await fetch(`${process.env.REACT_APP_API_BASE}/token`, requestOptions);
+//     const requestOptions = {
+//         method: 'POST',
+//         headers: myHeaders,
+//         body: raw,
+//         redirect: 'follow'
+//     };
 
-    if(response.ok){
-      const token = await response.json();
+//     const response = await fetch(`${process.env.REACT_APP_API_BASE}/token`, requestOptions);
 
-      if(token.access_token){
+//     if(response.ok){
+//       const token = await response.json();
 
-        return token.access_token;
+//       if(token.access_token){
+
+//         return token.access_token;
         
-      }
-  }
+//       }
+//     }
+//   }
+// };
 
-  }
-};
-
-export default ApiService;
+// export default ApiService;

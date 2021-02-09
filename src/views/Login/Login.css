@@ -1,4 +1,28 @@
 .login-container {
     width: 100%;
     height: 100%;
+    background: rgb(37, 32, 32);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.side-bar-container{
+    background: rgb(20, 17, 17);
+}
+
+.login-input-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.input-items {
+    height: 40%;
+    width: 50%;
+    background: pink;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
 }
