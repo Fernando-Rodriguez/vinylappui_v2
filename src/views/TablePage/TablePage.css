@@ -1,0 +1,53 @@
+.table-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    overflow-y: scroll;
+    font-size: 20px;
+}
+
+.table-whole{
+    width: 90%;
+    height: 90%;
+    text-align: center;
+    background: darkgray;
+}
+
+.add-album-button-container {
+    background-color: rgb(20, 18, 15);
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.button-item {
+    width: 150px;
+    padding: 10px;
+    margin: 5px;
+    margin-right: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 1px;
+    color: white;
+    border: 1px solid white;
+}
+
+.button-item:hover{
+    border: 1px solid black;
+    background: gray;
+    cursor: pointer;
+}
+
+.isActive {
+    border: 1px solid black;
+    background: gray;
+    font-weight: bolder;
+}
+
+.button-item span {
+    margin: 0 5px;
+}

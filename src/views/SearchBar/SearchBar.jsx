@@ -1,7 +1,25 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { AlbumContext } from '../../context/AlbumProvider';
+import {debounce1} from '../../services/utilities';
 import './SearchBar.css';
 
-const SearchBar = ({searchbarHandler}) => {
+const SearchBar = () => {
+
+    const [
+        albums,
+        setAlbums,
+        selectedAlbum,
+        setSelectedAlbum,
+        addAlbumHandler,
+        deleteAlbumHandler,
+        updateAlbumHandler,
+        filteredAlbums,
+        setSearch,
+      ] = useContext(AlbumContext);
+    
+    const debouncedInputHandler = debounce1((values) => {
+        setSearch(values);
+    }, 500);
 
     return(
         <div className="searchbar-container">
@@ -10,7 +28,7 @@ const SearchBar = ({searchbarHandler}) => {
                     className="searchbar-input" 
                     type="text"
                     onChange={(e) => {
-                        searchbarHandler(e.target.value);
+                        debouncedInputHandler(e.target.value);
                     }}
                 />
             </div>

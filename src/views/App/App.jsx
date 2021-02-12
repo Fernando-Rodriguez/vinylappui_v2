@@ -18,14 +18,11 @@ const App = () => {
         <UserProvider>
          <AlbumProvider>
             <Switch>
-              <Route path='/login'>
+              <Route exact path='/login'>
                 <Login />
               </Route>
-              <PrivateRoute path='/' exact>
+              <PrivateRoute path='/'>
                   <SearchPage />          
-              </PrivateRoute>
-              <PrivateRoute path='/search' exact>
-                <div>this'll be stuff</div>
               </PrivateRoute>
             </Switch>
           </AlbumProvider>
