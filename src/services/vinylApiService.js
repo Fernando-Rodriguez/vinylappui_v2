@@ -45,10 +45,8 @@ const VinylApiService = {
         // DataPacket
         // "user": "Frod080",
         // "album": "Catch For Us the Foxes",
-        // "artist": "MewithoutYou",
-        // "imageUrl": "https://i.scdn.co/image/ab67616d0000b2730c7a52516acf1393f6f75b2f",
-        // "rating": 5
-
+        // "artist": "MewithoutYou"
+        
         try {
             const response = await axios.post('/ownedalbums', dataPacket);
             return response.data;

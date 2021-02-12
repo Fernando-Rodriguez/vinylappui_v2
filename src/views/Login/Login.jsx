@@ -47,8 +47,8 @@ const Login = () => {
             <div className="input-items">
                 <h1>Loading...</h1>
             </div>
-        )
-    }
+        );
+    };
 
     return(
         <div className="login-container">
