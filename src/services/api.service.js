@@ -1,63 +1,74 @@
-// This service has been replaced by vinylApiService. It was taken from 
-// the original version of the app.
+import TokenService from './token.service';
+import axios from 'axios';
 
-// const ApiService = {
+const VinylApiService = {
 
-//   getAlAlbums: async (token) => {
+    init: () => {
+        axios.defaults.baseURL = process.env.REACT_APP_API_BASE;
+    },
 
-//     let myHeaders = new Headers();
+    setApiHeaders: () => {
+        axios.defaults.headers = {
+            'Authorization': `Bearer ${TokenService.getToken()}`,
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        };
+    },
 
-//     myHeaders.append(
-//       "Authorization",
-//       `Bearer ${token}`
-//     );
+    removeApiHeaders: () => {
+        axios.defaults.headers.common = {};
+    },
 
-//     const requestOptions = {
-//       method: "GET",
-//       headers: myHeaders,
-//       redirect: "follow",
-//     };
+    getDataAsync: async () => {
+        try {
+            // Set Header then make call.
+            VinylApiService.setApiHeaders();
 
-//     const data = await fetch(
-//       `${process.env.REACT_APP_API_BASE}/ownedalbums`,
-//       requestOptions
-//     );
+            const response = await axios.get('/ownedalbums');
+            const data = response.data.owned_Albums;
+            return data;
+        } catch (e) {
+            console.log(e.toString());
+        }
+    },
 
-//     const dataInJson = await data.json();
+    searchDataAsync: async () => {
+        try {
+            //return albums.owned_Albums.filter(album => album.id === input_Id)[0];
 
-//     return dataInJson;
-//   },
+        } catch (e) {
+            console.log(e.toString());
+        }
+    },
 
-//   getToken: async (email, password) => {
+    postDataAsync: async (dataPacket) => {
 
-//     const myHeaders = new Headers();
-//     myHeaders.append("Content-Type", "application/json");
-
-//     const raw = JSON.stringify(
-//     {
-//         "clientname": email,
-//         "clientsecret": password
-//     });
-
-//     const requestOptions = {
-//         method: 'POST',
-//         headers: myHeaders,
-//         body: raw,
-//         redirect: 'follow'
-//     };
-
-//     const response = await fetch(`${process.env.REACT_APP_API_BASE}/token`, requestOptions);
-
-//     if(response.ok){
-//       const token = await response.json();
-
-//       if(token.access_token){
-
-//         return token.access_token;
+        // DataPacket
+        // "user": "Frod080",
+        // "album": "Catch For Us the Foxes",
+        // "artist": "MewithoutYou"
         
-//       }
-//     }
-//   }
-// };
+        try {
+            const response = await axios.post('/ownedalbums', dataPacket);
+            return response.data;
+        } catch (e) {
+            console.log(e.toString());
+        }
+    },
 
-// export default ApiService;
+    deleteDataAsync: async () => {
+        // Method must be implemented in api.
+        try {
+            //const response = await axios.delete(`/ownedalbums/${id}`);
+            //return response.data;
+        } catch (e) {
+            console.log(e);
+        }
+    },
+
+    generalRequestAsync: async (config) => {
+        return axios(config);
+    }
+};
+
+export default VinylApiService;

@@ -72,10 +72,6 @@
     color: #b3b3b3;
 }
 
-.navbar-links a:focus {
-    color: red;
-}
-
 .navbar-bar{
     margin: 10% 0;
     width: 80%;

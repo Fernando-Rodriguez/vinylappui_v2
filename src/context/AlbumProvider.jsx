@@ -1,6 +1,6 @@
 import React, { createContext, useState } from "react";
 import { debounce1 } from "../services/utilities";
-import ApiService from "../services/vinylApiService";
+import ApiService from "../services/api.service";
 
 export const AlbumContext = createContext();
 
