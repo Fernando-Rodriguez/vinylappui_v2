@@ -4,7 +4,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: rgb(14, 11, 11);
+    background-color: #3F3244;
 }
 
 .footer-content {
@@ -13,5 +13,5 @@
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-    color: rgb(68, 68, 68);
+    color: #A9ACA9;
 }

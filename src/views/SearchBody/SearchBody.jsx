@@ -6,7 +6,7 @@ import './SearchBody.css';
 // This will hold the album cards
 const SearchBody = ({ album }) => {
 
-    if(album === undefined){
+    if(album === undefined || null){
         return(
             <div>oops</div>
         );

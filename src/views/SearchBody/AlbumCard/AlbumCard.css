@@ -9,7 +9,7 @@
     position: relative;
     font-size: 20px;
     font-weight: bolder;
-    color: white;
+    color: #BFC3BA;
     transition: all 0.1s ease-in;
     cursor: pointer;
 }
@@ -51,7 +51,7 @@
 
 .card-container:hover {
     transform: scale(1.02);
-    box-shadow: 0 0 5px black;
+    box-shadow: 0 0 10px #2F2235;
 }
 
 .card-container:hover .card-info {
