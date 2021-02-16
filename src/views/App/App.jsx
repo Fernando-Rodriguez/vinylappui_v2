@@ -1,5 +1,5 @@
 import './App.css';
-import React from "react";
+import React, { useEffect } from "react";
 import {
   BrowserRouter as Router,
   Switch,
@@ -10,8 +10,15 @@ import UserProvider from '../../context/UserProvider';
 import AlbumProvider from '../../context/AlbumProvider';
 import PrivateRoute from '../routes/PrivateRoute';
 import Login from '../Login/Login';
+import VinylApiService from '../../services/api.service';
 
 const App = () => { 
+
+  useEffect(() => {
+    VinylApiService.init();
+    VinylApiService.setApiHeaders();
+  }, [])
+
   return (
     <div className="App">
        <Router >

@@ -5,7 +5,7 @@ import "./EditOptions.css";
 const EditOptions = ({ album, openHandler }) => {
   const [artistName, setArtist] = useState("");
   const [albumName, setAlbum] = useState("");
-  const [rating, setRating] = useState("");
+  const [rating, setRating] = useState(0);
   const [
     albums,
     setAlbums,
@@ -17,13 +17,21 @@ const EditOptions = ({ album, openHandler }) => {
   ] = useContext(AlbumContext);
 
   const albumChangeHandler = async (id) => {
-    await updateAlbumHandler(id, {
-      artist: artistName,
+
+    const userId = "5f90c145b5a8ec412e4307f4";
+
+    const update = await updateAlbumHandler(userId, id, {
+      user: "Frod080",
       album: albumName,
+      artist: artistName,
       rating: rating,
     });
 
-    openHandler();
+    if(update){
+      openHandler();
+    }
+
+    console.log(update);    
   };
 
   return (
@@ -31,20 +39,20 @@ const EditOptions = ({ album, openHandler }) => {
       <div className="main-container">
         <div className="edit-container">
           <input
-            placeholder="Edit Artist"
+            placeholder={album.artist}
             type="text"
             value={artistName}
             onChange={(e) => setArtist(e.target.value)}
           />
           <input
-            placeholder="Edit Album"
+            placeholder={album.album}
             type="text"
             value={albumName}
             onChange={(e) => setAlbum(e.target.value)}
           />
           <input
-            placeholder="Edit Rating"
-            type="text"
+            placeholder={album.rating}
+            type="number"
             value={rating}
             onChange={(e) => setRating(e.target.value)}
           />

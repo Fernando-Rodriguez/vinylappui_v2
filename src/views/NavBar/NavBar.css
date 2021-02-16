@@ -67,6 +67,10 @@
     box-shadow:0 0 5px #3F3244;
 }
 
+.navbar-links:focus{
+    outline: none;
+}
+
 .navbar-links a {
     text-decoration: none;
     color: #BFC3BA;

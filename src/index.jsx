@@ -6,8 +6,6 @@ import App from './views/App/App';
 import reportWebVitals from './reportWebVitals';
 import VinylApiService from './services/api.service';
 
-VinylApiService.init();
-
 ReactDOM.render(
   <React.StrictMode>
     <App />

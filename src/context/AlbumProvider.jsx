@@ -1,5 +1,4 @@
 import React, { createContext, useState } from "react";
-import { debounce1 } from "../services/utilities";
 import ApiService from "../services/api.service";
 
 export const AlbumContext = createContext();
@@ -10,33 +9,55 @@ export const AlbumProvider = (props) => {
   const [selectedAlbum, setSelectedAlbum] = useState([]);
 
   const addAlbumHandler = async (album) => {
-    //await ApiService.postDataAsync(album);
-    setAlbums([...albums, album]);
+    if(album !== null){
+      try{
+        //await ApiService.postDataAsync(album);
+        setAlbums([...albums, album]);
+      }
+      catch(err){
+        console.log(err.ToString());
+      }
+    }
   };
 
   const deleteAlbumHandler = async (id) => {
-    //await ApiService.deleteDataAsync(id);
 
-    const filteredAlbums = albums.filter((album) => {
-      if (album.id !== id) {
-        return album;
+    if(id !== null){
+      try{
+        //await ApiService.deleteDataAsync(id);
+        const filteredAlbums = albums.filter((album) => {
+          if (album.id !== id) {
+            return album;
+          }
+        });
+        setAlbums(filteredAlbums);
       }
-    });
-    setAlbums(filteredAlbums);
+      catch(err){
+        console.log(err.ToString());
+      }
+    }
+
+    
   };
 
-  const updateAlbumHandler = async (id, changes) => {
-    const newList = albums.map((album, index) => {
-      if (album.id === id) {
-        album.album = changes.album;
-        album.artist = changes.artist;
-        album.rating = changes.rating;
-      }
-      return album;
-    });
+  const updateAlbumHandler = async (userId, id, changes) => {
 
-    console.log(newList);
-    setAlbums(newList);
+    try{
+      const result = await ApiService.updateDataAsync(userId, id, changes);
+
+      const newList = albums.map((album) => {
+        if (album.id === id) {
+          album.album = changes.album;
+          album.artist = changes.artist;
+          album.rating = changes.rating;
+        }
+        return album;
+      });
+      setAlbums(newList);   
+    }
+    catch(err){
+      console.log(err.toString());
+    }
   };
 
   const filteredAlbums = () => {
