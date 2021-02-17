@@ -20,24 +20,26 @@ const VinylApiService = {
     },
 
     getDataAsync: async () => {
-        try {
-            // Set Header then make call.
-            VinylApiService.init();
-            VinylApiService.setApiHeaders();
+        VinylApiService.init();
+        VinylApiService.setApiHeaders();
 
+        try {
             const response = await axios.get('/ownedalbums');
             const data = response.data.owned_Albums;
             return data;
+
         } catch (e) {
             console.log(e.toString());
         }
     },
 
-    searchDataAsync: async () => {
+    searchDataAsync: async (userId, id) => {
         try {
-            //return albums.owned_Albums.filter(album => album.id === input_Id)[0];
             VinylApiService.setApiHeaders();
 
+            const response = await axios.get(`/ownedalbums/${userId}/${id}`);
+
+            return response.data;
 
         } catch (e) {
             console.log(e.toString());
@@ -45,13 +47,6 @@ const VinylApiService = {
     },
 
     postDataAsync: async (dataPacket) => {
-
-        // DataPacket
-        // "user": "Frod080",
-        // "album": "Catch For Us the Foxes",
-        // "artist": "MewithoutYou"
-        // "rating": 3
-        
         try {
             const response = await axios.post('/ownedalbums', dataPacket);
             return response.data;
@@ -71,18 +66,19 @@ const VinylApiService = {
     },
 
     updateDataAsync: async (userId, albumId, changes) => {
-         // DataPacket
-        // "user": "Frod080",
-        // "album": "Catch For Us the Foxes",
-        // "artist": "MewithoutYou"
-        // "rating": 3
 
-        var config = {
-        method: 'put',
-        url: `/ownedalbums/${userId}/${albumId}`,
-        data : changes
-        };
-       await axios(config);
+        VinylApiService.init();
+        VinylApiService.setApiHeaders();
+
+        console.log(userId);
+        console.log(albumId);
+        console.log(changes);
+
+        await axios({
+            method: 'PUT',
+            url:`/ownedalbums/${userId}/${albumId}`, 
+            data:changes
+        });
     },
 
     generalRequestAsync: async (config) => {

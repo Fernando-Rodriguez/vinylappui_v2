@@ -42,22 +42,18 @@ export const AlbumProvider = (props) => {
 
   const updateAlbumHandler = async (userId, id, changes) => {
 
-    try{
-      const result = await ApiService.updateDataAsync(userId, id, changes);
+    await ApiService.updateDataAsync(userId, id, changes);
 
-      const newList = albums.map((album) => {
-        if (album.id === id) {
-          album.album = changes.album;
-          album.artist = changes.artist;
-          album.rating = changes.rating;
-        }
-        return album;
-      });
-      setAlbums(newList);   
-    }
-    catch(err){
-      console.log(err.toString());
-    }
+    const newList = albums.map((album) => {
+      if (album.id === id) {
+        album.album = changes.album;
+        album.artist = changes.artist;
+        album.rating = changes.rating;
+      }
+      return album;
+    });
+    
+    setAlbums(newList);  
   };
 
   const filteredAlbums = () => {

@@ -5,7 +5,7 @@ import "./EditOptions.css";
 const EditOptions = ({ album, openHandler }) => {
   const [artistName, setArtist] = useState("");
   const [albumName, setAlbum] = useState("");
-  const [rating, setRating] = useState(0);
+  const [ratingItem, setRating] = useState(0);
   const [
     albums,
     setAlbums,
@@ -20,19 +20,29 @@ const EditOptions = ({ album, openHandler }) => {
 
     const userId = "5f90c145b5a8ec412e4307f4";
 
-    const update = await updateAlbumHandler(userId, id, {
-      user: "Frod080",
-      album: albumName,
-      artist: artistName,
-      rating: rating,
-    });
+    const album = {
+      "user": "Frod080",
+      "album": albumName,
+      "artist": artistName,
+      "rating": parseInt(ratingItem)
+    };
 
-    if(update){
-      openHandler();
-    }
+    await updateAlbumHandler(userId, id, album);
 
-    console.log(update);    
+    openHandler();
   };
+
+  const handleArtistChange = (e) => {
+    setArtist(e.target.value);
+  }
+
+  const handleAlbumChange = (e) => {
+    setAlbum(e.target.value);
+  }
+
+  const handleRatingChange = (e) => {
+    setRating(e.target.value)
+  }
 
   return (
     <div className="edit-full">
@@ -42,19 +52,19 @@ const EditOptions = ({ album, openHandler }) => {
             placeholder={album.artist}
             type="text"
             value={artistName}
-            onChange={(e) => setArtist(e.target.value)}
+            onChange={handleArtistChange}
           />
           <input
             placeholder={album.album}
             type="text"
             value={albumName}
-            onChange={(e) => setAlbum(e.target.value)}
+            onChange={handleAlbumChange}
           />
           <input
             placeholder={album.rating}
-            type="number"
-            value={rating}
-            onChange={(e) => setRating(e.target.value)}
+            type="text"
+            value={ratingItem}
+            onChange={handleRatingChange}
           />
         </div>
         <div className="edit-img-container">

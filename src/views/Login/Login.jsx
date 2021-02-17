@@ -1,22 +1,18 @@
 import React, { useContext, useState } from 'react';
 import { UserContext } from '../../context/UserProvider';
 import TextInput from '../components/TextInput';
-import Button from '../components/Button';
 import './Login.css';
 
 const Login = () => {
 
     const [token, SignInHandler, SignOutHandler] = useContext(UserContext);
-    const [userInput, setUserInput] = useState();
-    const [passInput, setPassInput] = useState();
+    const [userInput, setUserInput] = useState("");
+    const [passInput, setPassInput] = useState("");
     const [isLoading, setIsLoading] = useState(false);
 
     const LoginThing =  async() => {
         setIsLoading(true);
         await SignInHandler(userInput, passInput);
-        setIsLoading(false);
-        setPassInput("");
-        setUserInput("");
     }
 
     const onUserChangeHandler = (value) => {
@@ -56,8 +52,9 @@ const Login = () => {
                 <img src="" alt=""/>
             </div>
             <div className="login-input-container">
-                {isLoading ? LoadingSection() : LoginSection()}
+                {LoginSection()}
             </div>
+            {isLoading && LoadingSection()}
         </div>
     );
 }

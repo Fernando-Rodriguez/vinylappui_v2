@@ -9,6 +9,7 @@ import VinylApiService from "../../services/api.service";
 import { AlbumContext } from "../../context/AlbumProvider";
 import { UserContext } from "../../context/UserProvider";
 import "./SearchPage.css";
+import AlbumPage from "../AlbumPage/AlbumPage";
 
 // This will work as the main container for the searchpage.
 const SearchPage = () => {
@@ -24,7 +25,7 @@ const SearchPage = () => {
     setSearch,
   ] = useContext(AlbumContext);
 
-  let { path, url } = useRouteMatch();
+  let { path } = useRouteMatch();
 
   useEffect(() => {
     const getAlbums = async () => {
@@ -46,6 +47,9 @@ const SearchPage = () => {
           </Route>
           <Route exact path={`/add-album`}>
             <TablePage />
+          </Route>
+          <Route exact path='/album/:id'>
+            <AlbumPage />
           </Route>
         </Switch>
       </div>

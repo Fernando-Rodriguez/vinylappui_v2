@@ -1,10 +1,16 @@
-import React, { useEffect, useContext } from 'react';
-import { AlbumContext } from '../../context/AlbumProvider';
+import React from 'react';
+import { useLocation, useHistory } from 'react-router-dom';
 import AlbumCard from './AlbumCard/AlbumCard';
 import './SearchBody.css';
 
 // This will hold the album cards
 const SearchBody = ({ album }) => {
+
+    const history = useHistory();
+
+    const clickHandler = (id) => {
+        history.push(`/album/${id}`);
+    }
 
     if(album === undefined || null){
         return(
@@ -15,7 +21,10 @@ const SearchBody = ({ album }) => {
         return(
             <div className="searchbody-container">
                 {album.map((dBalbum, index) => {
-                    return <AlbumCard album={dBalbum} key={index} />
+                    return <AlbumCard 
+                                album={dBalbum} 
+                                key={index} 
+                                clickHandler={clickHandler}/>
                 })}
             </div>
         );

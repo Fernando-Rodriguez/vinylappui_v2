@@ -11,9 +11,9 @@ import AlbumProvider from '../../context/AlbumProvider';
 import PrivateRoute from '../routes/PrivateRoute';
 import Login from '../Login/Login';
 import VinylApiService from '../../services/api.service';
+import AlbumPage from '../AlbumPage/AlbumPage';
 
 const App = () => { 
-
   useEffect(() => {
     VinylApiService.init();
     VinylApiService.setApiHeaders();
