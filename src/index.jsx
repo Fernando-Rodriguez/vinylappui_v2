@@ -4,9 +4,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './views/App/App';
 import reportWebVitals from './reportWebVitals';
-import VinylApiService from './services/vinylApiService';
-
-VinylApiService.init();
+import VinylApiService from './services/api.service';
 
 ReactDOM.render(
   <React.StrictMode>

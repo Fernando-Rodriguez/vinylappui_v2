@@ -5,8 +5,7 @@ const MainFooter = () => {
     return(
         <div className="footer-container">
             <div className="footer-content">
-                <p>Created by Rodriguez.Co</p>
-                <i class="fas fa-handshake"></i>
+                <p>Created by F Rodriguez</p>
             </div>
         </div>
     );

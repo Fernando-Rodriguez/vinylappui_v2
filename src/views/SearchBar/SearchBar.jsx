@@ -27,6 +27,7 @@ const SearchBar = () => {
                 <input 
                     className="searchbar-input" 
                     type="text"
+                    placeholder="Search Albums Here"
                     onChange={(e) => {
                         debouncedInputHandler(e.target.value);
                     }}

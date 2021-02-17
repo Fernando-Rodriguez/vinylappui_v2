@@ -1,5 +1,5 @@
 import TokenService from "./token.service";
-import VinylApiService  from "./vinylApiService";
+import VinylApiService  from "./api.service";
 
 const UserService = {
 

@@ -11,13 +11,12 @@
     grid-column: 1;
     grid-row-start: 1;
     grid-row-end: 4;
-    background: orange;
 }
 
 .search-page-body {
     grid-column: 2;
     grid-row: 2;
-    background: rgb(20, 17, 17);
+    background: #60495A;
 }
 
 .search-page-searchbar {   
@@ -29,5 +28,4 @@
 .search-page-footer {
     grid-row: 3;
     grid-column: 2;
-    background: yellow;
 }

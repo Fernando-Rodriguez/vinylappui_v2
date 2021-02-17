@@ -1,20 +1,15 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Route, Switch, useRouteMatch } from "react-router-dom";
-
 import MainFooter from "../MainFooter/MainFooter";
 import NavBar from "../NavBar/NavBar";
 import SearchBody from "../SearchBody/SearchBody";
 import SearchBar from "../SearchBar/SearchBar";
-
-import VinylApiService from "../../services/vinylApiService";
-
+import TablePage from "../TablePage/TablePage";
+import VinylApiService from "../../services/api.service";
 import { AlbumContext } from "../../context/AlbumProvider";
 import { UserContext } from "../../context/UserProvider";
-
-import { debounce1 } from "../../services/utilities";
-
 import "./SearchPage.css";
-import TablePage from "../TablePage/TablePage";
+import AlbumPage from "../AlbumPage/AlbumPage";
 
 // This will work as the main container for the searchpage.
 const SearchPage = () => {
@@ -30,15 +25,12 @@ const SearchPage = () => {
     setSearch,
   ] = useContext(AlbumContext);
 
-  const [token] = useContext(UserContext);
-
-  let { path, url } = useRouteMatch();
+  let { path } = useRouteMatch();
 
   useEffect(() => {
     const getAlbums = async () => {
-      //const albumsJson = await ApiService.getAlAlbums(token);
       const albums = await VinylApiService.getDataAsync();
-      setAlbums(albums);
+      await setAlbums(albums);
     };
     getAlbums();
   }, []);
@@ -55,6 +47,9 @@ const SearchPage = () => {
           </Route>
           <Route exact path={`/add-album`}>
             <TablePage />
+          </Route>
+          <Route exact path='/album/:id'>
+            <AlbumPage />
           </Route>
         </Switch>
       </div>
