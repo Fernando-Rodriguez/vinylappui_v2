@@ -19,7 +19,6 @@ const UserService = {
         try {
             //makes the request.
             const response = await VinylApiService.generalRequestAsync(requestData);
-
             TokenService.saveToken(response.data.access_token);
             //pre-sets the headers with the token for the api calls.
             VinylApiService.setApiHeaders();

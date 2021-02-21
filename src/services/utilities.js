@@ -20,3 +20,25 @@ export function debounce1(func, wait, immediate) {
     }
   }
 }
+
+function debouncer(func, timeDelay, cancel) {
+  let timeout;
+
+  return function(...args) {
+    const newThis = this;
+    const callNow = cancel && !timeout;
+
+    clearTimeout(timeout);
+
+    timeout = setTimeout(() => {
+      timeout = null;
+      if(!cancel) {
+        func.apply(newThis, ...args);
+      }
+    }, timeDelay);
+
+    if(callNow) {
+      func.apply(newThis, ...args);
+    }
+  }
+}

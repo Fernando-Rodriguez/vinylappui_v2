@@ -5,34 +5,38 @@ import {
   Switch,
   Route  
 } from "react-router-dom";
-import SearchPage from '../SearchPage/SearchPage';
+import SearchPage from '../HomeView/SearchPage/SearchPage';
 import UserProvider from '../../context/UserProvider';
 import AlbumProvider from '../../context/AlbumProvider';
-import PrivateRoute from '../routes/PrivateRoute';
-import Login from '../Login/Login';
+import PrivateRoute from '../RouterRoutes/PrivateRoute';
+import Login from '../LoginView/Login';
 import VinylApiService from '../../services/api.service';
-import AlbumPage from '../AlbumPage/AlbumPage';
+import TokenService from '../../services/token.service';
 
 const App = () => { 
   useEffect(() => {
     VinylApiService.init();
     VinylApiService.setApiHeaders();
+    return () => {
+      VinylApiService.removeApiHeaders();
+      TokenService.removeToken();
+    }
   }, [])
 
   return (
     <div className="App">
        <Router >
         <UserProvider>
-         <AlbumProvider>
             <Switch>
               <Route exact path='/login'>
                 <Login />
               </Route>
-              <PrivateRoute path='/'>
-                  <SearchPage />          
-              </PrivateRoute>
+              <AlbumProvider>
+                <PrivateRoute path='/'>
+                    <SearchPage />          
+                </PrivateRoute>
+              </AlbumProvider>
             </Switch>
-          </AlbumProvider>
           </UserProvider>
       </Router>
     </div>

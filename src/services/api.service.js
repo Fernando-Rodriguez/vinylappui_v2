@@ -20,8 +20,6 @@ const VinylApiService = {
     },
 
     getDataAsync: async () => {
-        VinylApiService.init();
-        VinylApiService.setApiHeaders();
 
         try {
             const response = await axios.get('/ownedalbums');
@@ -66,19 +64,16 @@ const VinylApiService = {
     },
 
     updateDataAsync: async (userId, albumId, changes) => {
-
-        VinylApiService.init();
-        VinylApiService.setApiHeaders();
-
-        console.log(userId);
-        console.log(albumId);
-        console.log(changes);
-
-        await axios({
-            method: 'PUT',
-            url:`/ownedalbums/${userId}/${albumId}`, 
-            data:changes
-        });
+        try{
+            await axios({
+                method: 'PUT',
+                url:`/ownedalbums/${userId}/${albumId}`, 
+                data:changes
+            });
+        }
+        catch(err){
+            console.log(err);
+        }
     },
 
     generalRequestAsync: async (config) => {

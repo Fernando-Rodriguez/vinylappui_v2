@@ -3,16 +3,15 @@ const TOKEN_KEY = 'access_token';
 const TokenService = {
 
     getToken() {
-
-        return localStorage.getItem(TOKEN_KEY)
+        return sessionStorage.getItem(TOKEN_KEY)
     },
 
     saveToken(accessToken) {
-        localStorage.setItem(TOKEN_KEY, accessToken)
+        sessionStorage.setItem(TOKEN_KEY, accessToken)
     },
 
     removeToken() {
-        localStorage.removeItem(TOKEN_KEY)
+        sessionStorage.removeItem(TOKEN_KEY)
     }
 };
 

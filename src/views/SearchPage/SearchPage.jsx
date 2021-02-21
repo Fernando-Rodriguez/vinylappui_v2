@@ -1,15 +1,15 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Route, Switch, useRouteMatch } from "react-router-dom";
 import MainFooter from "../MainFooter/MainFooter";
-import NavBar from "../NavBar/NavBar";
+import NavBar from "../../NavBar/NavBar";
 import SearchBody from "../SearchBody/SearchBody";
-import SearchBar from "../SearchBar/SearchBar";
+import SearchBar from "../../SearchBar/SearchBar";
 import TablePage from "../TablePage/TablePage";
-import VinylApiService from "../../services/api.service";
-import { AlbumContext } from "../../context/AlbumProvider";
-import { UserContext } from "../../context/UserProvider";
+import VinylApiService from "../../../services/api.service";
+import { AlbumContext } from "../../../context/AlbumProvider";
+import { UserContext } from "../../../context/UserProvider";
 import "./SearchPage.css";
-import AlbumPage from "../AlbumPage/AlbumPage";
+import AlbumPage from "../../AlbumPage/AlbumPage";
 
 // This will work as the main container for the searchpage.
 const SearchPage = () => {

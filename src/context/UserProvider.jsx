@@ -7,7 +7,9 @@ export const UserContext = createContext();
 export const UserProvider = (props) => {
 
     const existingToken = TokenService.getToken();
+
     const [token, setToken] = useState(existingToken);
+    const [currentUser, setCurrentUser] = useState({});
 
     let history = useHistory();
     let location = useLocation();
@@ -27,7 +29,12 @@ export const UserProvider = (props) => {
     }
 
     return(
-        <UserContext.Provider value={[token, SignInHandler, SignOutHandler]}>
+        <UserContext.Provider value={[
+            currentUser,
+            token, 
+            SignInHandler, 
+            SignOutHandler,
+        ]}>
             {props.children}
         </UserContext.Provider>
     );
