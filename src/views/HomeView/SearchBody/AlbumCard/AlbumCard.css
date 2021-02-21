@@ -1,0 +1,59 @@
+.card-container {
+    margin: 1%;
+    width: 30%;
+    height: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    font-size: 20px;
+    font-weight: bolder;
+    color: #BFC3BA;
+    transition: all 0.1s ease-in;
+    cursor: pointer;
+}
+
+.card-container img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.card-background {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-info {
+    height: 50%;
+    width: 50%;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.7);
+    opacity: 0%;
+    transition: all 0.2s ease-in;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.card-album, .card-artist {
+    font-size: 20px;
+}
+
+.card-container:hover {
+    transform: scale(1.02);
+    box-shadow: 0 0 10px #2F2235;
+}
+
+.card-container:hover .card-info {
+    opacity: 100%;
+}

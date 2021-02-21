@@ -1,0 +1,13 @@
+.button-container {
+    width: 1000px;
+    height: 100px;
+    color: black;
+    background-color: red;
+}
+
+.custom-button {
+    width: 100px;
+    height: 100px;
+    color: yellow;
+    background-color: orange;
+}
