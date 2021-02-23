@@ -5,30 +5,29 @@ import './SearchBody.css';
 
 // This will hold the album cards
 const SearchBody = ({ album }) => {
+  const history = useHistory();
 
-    const history = useHistory();
+  const clickHandler = (id) => {
+    history.push(`/album/${id}`);
+  };
 
-    const clickHandler = (id) => {
-        history.push(`/album/${id}`);
-    }
+  if (album === undefined || album === null) {
+    return (
+      <div>oops</div>
+    );
+  }
 
-    if(album === undefined || null){
-        return(
-            <div>oops</div>
-        );
-    }
-    else{
-        return(
-            <div className="searchbody-container">
-                {album.map((dBalbum, index) => {
-                    return <AlbumCard 
-                                album={dBalbum} 
-                                key={index} 
-                                clickHandler={clickHandler}/>
-                })}
-            </div>
-        );
-    }
+  return (
+    <div className="searchbody-container">
+      {album.map((dBalbum) => (
+        <AlbumCard
+          album={dBalbum}
+          key={dBalbum.id}
+          clickHandler={clickHandler}
+        />
+      ))}
+    </div>
+  );
 };
 
 export default SearchBody;

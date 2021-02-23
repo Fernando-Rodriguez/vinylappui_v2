@@ -1,28 +1,23 @@
-import React, { useContext, useState } from "react";
-import { AlbumContext } from "../../../context/AlbumProvider";
-import "./AddAlbum.css";
+/* eslint-disable no-console */
+import React, { useContext, useState } from 'react';
+import { AlbumMethodContext } from '../../../../context/AlbumMethodProvider';
+import './AddAlbum.css';
 
 const AddAlbum = () => {
-  const [artistName, setArtistName] = useState("");
-  const [albumName, setAlbumName] = useState("");
-  const [
-    albums,
-    setAlbums,
-    selectedAlbum,
-    setSelectedAlbum,
-    addAlbumHandler,
-    deleteAlbumHandler,
-  ] = useContext(AlbumContext);
+  const [artistName, setArtistName] = useState('');
+  const [albumName, setAlbumName] = useState('');
+  // eslint-disable-next-line no-unused-vars
+  const [addAlbumHandler] = useContext(AlbumMethodContext);
 
   const buttonHandler = async () => {
     await addAlbumHandler({
       artist: artistName,
       album: albumName,
-      user: "Frod080",
+      user: 'Frod080',
     });
     console.log(`${artistName} ${albumName}`);
-    setArtistName("");
-    setAlbumName("");
+    setArtistName('');
+    setAlbumName('');
   };
 
   return (
@@ -40,7 +35,7 @@ const AddAlbum = () => {
           value={albumName}
           onChange={(e) => setAlbumName(e.target.value)}
         />
-        <button onClick={buttonHandler}>Add Album!</button>
+        <button type="button" onClick={buttonHandler}>Add Album!</button>
       </div>
     </div>
   );

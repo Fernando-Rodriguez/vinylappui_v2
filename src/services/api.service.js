@@ -1,84 +1,94 @@
-import TokenService from './token.service';
+/* eslint-disable no-console */
 import axios from 'axios';
+import TokenService from './token.service';
 
 const VinylApiService = {
 
-    init: () => {
-        axios.defaults.baseURL = process.env.REACT_APP_API_BASE;
-    },
+  init: () => {
+    axios.defaults.baseURL = process.env.REACT_APP_API_BASE;
+  },
 
-    setApiHeaders: () => {
-        axios.defaults.headers = {
-            'Authorization': `Bearer ${TokenService.getToken()}`,
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        };
-    },
+  setApiHeaders: () => {
+    axios.defaults.headers = {
+      Authorization: `Bearer ${TokenService.getToken()}`,
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    };
+  },
 
-    removeApiHeaders: () => {
-        axios.defaults.headers.common = {};
-    },
+  removeApiHeaders: () => {
+    axios.defaults.headers.common = {};
+  },
 
-    getDataAsync: async () => {
+  getDataAsync: async () => {
+    VinylApiService.init();
+    VinylApiService.setApiHeaders();
 
-        try {
-            const response = await axios.get('/ownedalbums');
-            const data = response.data.owned_Albums;
-            return data;
-
-        } catch (e) {
-            console.log(e.toString());
-        }
-    },
-
-    searchDataAsync: async (userId, id) => {
-        try {
-            VinylApiService.setApiHeaders();
-
-            const response = await axios.get(`/ownedalbums/${userId}/${id}`);
-
-            return response.data;
-
-        } catch (e) {
-            console.log(e.toString());
-        }
-    },
-
-    postDataAsync: async (dataPacket) => {
-        try {
-            const response = await axios.post('/ownedalbums', dataPacket);
-            return response.data;
-        } catch (e) {
-            console.log(e.toString());
-        }
-    },
-
-    deleteDataAsync: async () => {
-        // Method must be implemented in api.
-        try {
-            //const response = await axios.delete(`/ownedalbums/${id}`);
-            //return response.data;
-        } catch (e) {
-            console.log(e);
-        }
-    },
-
-    updateDataAsync: async (userId, albumId, changes) => {
-        try{
-            await axios({
-                method: 'PUT',
-                url:`/ownedalbums/${userId}/${albumId}`, 
-                data:changes
-            });
-        }
-        catch(err){
-            console.log(err);
-        }
-    },
-
-    generalRequestAsync: async (config) => {
-        return axios(config);
+    try {
+      const response = await axios.get('/ownedalbums');
+      const data = response.data.owned_Albums;
+      return data;
+    } catch (e) {
+      console.log(e.toString());
+      return null;
     }
+  },
+
+  searchDataAsync: async (userId, id) => {
+    VinylApiService.init();
+    VinylApiService.setApiHeaders();
+
+    try {
+      const response = await axios.get(`/ownedalbums/${userId}/${id}`);
+      return response.data;
+    } catch (e) {
+      console.log(e.toString());
+      return null;
+    }
+  },
+
+  postDataAsync: async (dataPacket) => {
+    VinylApiService.init();
+    VinylApiService.setApiHeaders();
+
+    try {
+      const response = await axios.post('/ownedalbums', dataPacket);
+      return response.data;
+    } catch (e) {
+      console.log(e.toString());
+      return null;
+    }
+  },
+
+  deleteDataAsync: async () => {
+    VinylApiService.init();
+    VinylApiService.setApiHeaders();
+
+    // Method must be implemented in api.
+    try {
+      // const response = await axios.delete(`/ownedalbums/${id}`);
+      // return response.data;
+    } catch (e) {
+      console.log(e);
+    }
+  },
+
+  updateDataAsync: async (userId, albumId, changes) => {
+    VinylApiService.init();
+    VinylApiService.setApiHeaders();
+
+    try {
+      await axios({
+        method: 'PUT',
+        url: `/ownedalbums/${userId}/${albumId}`,
+        data: changes,
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  },
+
+  generalRequestAsync: async (config) => axios(config),
 };
 
 export default VinylApiService;

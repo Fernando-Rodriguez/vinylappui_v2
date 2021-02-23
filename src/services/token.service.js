@@ -2,17 +2,17 @@ const TOKEN_KEY = 'access_token';
 
 const TokenService = {
 
-    getToken() {
-        return sessionStorage.getItem(TOKEN_KEY)
-    },
+  getToken() {
+    return localStorage.getItem(TOKEN_KEY);
+  },
 
-    saveToken(accessToken) {
-        sessionStorage.setItem(TOKEN_KEY, accessToken)
-    },
+  saveToken(accessToken) {
+    localStorage.setItem(TOKEN_KEY, accessToken);
+  },
 
-    removeToken() {
-        sessionStorage.removeItem(TOKEN_KEY)
-    }
+  removeToken() {
+    localStorage.removeItem(TOKEN_KEY);
+  },
 };
 
 export default TokenService;

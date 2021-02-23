@@ -1,44 +1,41 @@
-import React, { useContext, useState } from "react";
-import { AlbumMethodContext } from "../../../context/AlbumContextProvider";
-import "./EditOptions.css";
+import React, { useContext, useState } from 'react';
+import { AlbumMethodContext } from '../../../../context/AlbumMethodProvider';
+import './EditOptions.css';
 
 const EditOptions = ({ album, openHandler }) => {
-  const [artistName, setArtist] = useState("");
-  const [albumName, setAlbum] = useState("");
+  const [artistName, setArtist] = useState('');
+  const [albumName, setAlbum] = useState('');
   const [ratingItem, setRating] = useState(0);
-  const [
-    addAlbumHandler,
-    deleteAlbumHandler,
-    updateAlbumHandler,
+  // eslint-disable-next-line no-unused-vars
+  const [addAlbumHandler, deleteAlbumHandler, updateAlbumHandler,
   ] = useContext(AlbumMethodContext);
 
   const albumChangeHandler = async (id) => {
+    const userId = '5f90c145b5a8ec412e4307f4';
 
-    const userId = "5f90c145b5a8ec412e4307f4";
-
-    const album = {
-      "user": "Frod080",
-      "album": albumName,
-      "artist": artistName,
-      "rating": parseInt(ratingItem)
+    const newAlbum = {
+      user: 'Frod080',
+      album: albumName,
+      artist: artistName,
+      rating: parseInt(ratingItem, 10),
     };
 
-    await updateAlbumHandler(userId, id, album);
+    await updateAlbumHandler(userId, id, newAlbum);
 
     openHandler();
   };
 
   const handleArtistChange = (e) => {
     setArtist(e.target.value);
-  }
+  };
 
   const handleAlbumChange = (e) => {
     setAlbum(e.target.value);
-  }
+  };
 
   const handleRatingChange = (e) => {
-    setRating(e.target.value)
-  }
+    setRating(e.target.value);
+  };
 
   return (
     <div className="edit-full">
@@ -64,9 +61,9 @@ const EditOptions = ({ album, openHandler }) => {
           />
         </div>
         <div className="edit-img-container">
-          <img src={album.imageUrl} />
+          <img src={album.imageUrl} alt="Album Artwork" />
         </div>
-        <button onClick={() => albumChangeHandler(album.id)}>
+        <button type="button" onClick={() => albumChangeHandler(album.id)}>
           Save Changes
         </button>
       </div>

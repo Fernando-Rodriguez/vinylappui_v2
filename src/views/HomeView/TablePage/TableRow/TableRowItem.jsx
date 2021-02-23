@@ -1,17 +1,11 @@
-import React, { useContext, useState } from "react";
-import { AlbumContext } from "../../../context/AlbumProvider";
-import EditOptions from "../EditOptions/EditOptions";
-import "./TableRowItem.css";
+import React, { useContext, useState } from 'react';
+import { AlbumMethodContext } from '../../../../context/AlbumMethodProvider';
+import EditOptions from '../EditOptions/EditOptions';
+import './TableRowItem.css';
 
 const TableRowItem = ({ album }) => {
-  const [
-    albums,
-    setAlbums,
-    selectedAlbum,
-    setSelectedAlbum,
-    addAlbumHandler,
-    deleteAlbumHandler,
-  ] = useContext(AlbumContext);
+  // eslint-disable-next-line no-unused-vars
+  const [addAlbumHandler, deleteAlbumHandler, updateAlbumHandler] = useContext(AlbumMethodContext);
   const [isOpen, setIsOpen] = useState(false);
 
   const openHandler = () => {
@@ -20,27 +14,27 @@ const TableRowItem = ({ album }) => {
 
   return (
     <>
-      <tr className={isOpen ? "row-container open": "row-container"}>
-          <td className="row-item">{album.artist}</td>
-          <td className="row-item">{album.album}</td>
-          <td className="row-item">{album.rating}</td>
-          <td className="row-item">{album.user}</td>
-          <td className="row-item">
-            <button onClick={openHandler}>Edit</button>
-          </td>
-          <td className="row-item">
-            <button onClick={() => deleteAlbumHandler(album.id)}>Delete</button>
-          </td>
+      <tr className={isOpen ? 'row-container open' : 'row-container'}>
+        <td className="row-item">{album.artist}</td>
+        <td className="row-item">{album.album}</td>
+        <td className="row-item">{album.rating}</td>
+        <td className="row-item">{album.user}</td>
+        <td className="row-item">
+          <button type="button" onClick={openHandler}>Edit</button>
+        </td>
+        <td className="row-item">
+          <button type="button" onClick={() => deleteAlbumHandler(album.id)}>Delete</button>
+        </td>
       </tr>
       {isOpen && (
         <tr className="row-container">
           <td colSpan="6">
-              <div className="edit-container-row">
-                <EditOptions 
-                    album={album} 
-                    openHandler={openHandler}
-                />
-              </div>
+            <div className="edit-container-row">
+              <EditOptions
+                album={album}
+                openHandler={openHandler}
+              />
+            </div>
           </td>
         </tr>
       )}
