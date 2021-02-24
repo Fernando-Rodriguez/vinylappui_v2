@@ -17,7 +17,10 @@ const AlbumCard = ({ album, clickHandler }) => {
       onKeyDown={onKeyDownHandler}
     >
       <div className="card-background">
-        <img src={album.imageUrl} alt="album artwork" />
+        <img
+          src={album.imageUrl}
+          alt="album artwork"
+        />
         <div className="card-info">
           <div className="card-album">{album.album}</div>
           <div className="card-artist">{album.artist}</div>

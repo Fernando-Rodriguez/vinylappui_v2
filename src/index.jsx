@@ -1,10 +1,13 @@
 /* eslint-disable no-console */
-import 'dotenv/config';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+
 import App from './components/App/App';
+
 import reportWebVitals from './reportWebVitals';
+
+import './index.css';
+import 'dotenv/config';
 
 ReactDOM.render(
   <React.StrictMode>

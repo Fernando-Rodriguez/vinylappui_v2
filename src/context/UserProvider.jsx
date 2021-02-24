@@ -10,7 +10,12 @@ export const UserContext = createContext();
 const UserProvider = ({ children }) => {
   const existingToken = TokenService.getToken();
 
-  const [token, setToken] = useState(existingToken);
+  const [token, setToken] = useState(() => {
+    if (existingToken) {
+      return existingToken;
+    }
+    return null;
+  });
   const [currentUser, setCurrentUser] = useState({});
 
   const history = useHistory();

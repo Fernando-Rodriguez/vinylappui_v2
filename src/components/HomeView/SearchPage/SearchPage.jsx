@@ -43,6 +43,9 @@ const SearchPage = () => {
       <div className="search-page-navbar">
         <NavBar />
       </div>
+      <div className="search-page-searchbar">
+        <SearchBar />
+      </div>
       <div className="search-page-body">
         <Switch>
           <Route exact path={`${path}`}>
@@ -55,9 +58,6 @@ const SearchPage = () => {
             <AlbumPage />
           </Route>
         </Switch>
-      </div>
-      <div className="search-page-searchbar">
-        <SearchBar />
       </div>
       <div className="search-page-footer">
         <MainFooter />

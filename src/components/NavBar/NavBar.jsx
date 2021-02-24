@@ -23,7 +23,11 @@ const NavBar = () => {
   return (
     <div className="navbar-container">
       <div className="navbar-img">
-        <img className="navbar-image-item" src={imageIURL} alt="Album Artwork" />
+        <img
+          className="navbar-image-item"
+          src={imageIURL}
+          alt="Album Artwork"
+        />
       </div>
       <h3>
         Welcome, {currentUser.userName}!

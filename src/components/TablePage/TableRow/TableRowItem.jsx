@@ -1,11 +1,15 @@
+/* eslint-disable no-unused-vars */
 import React, { useContext, useState } from 'react';
 import { AlbumMethodContext } from '../../../context/AlbumMethodProvider';
 import EditOptions from '../EditOptions/EditOptions';
 import './TableRowItem.css';
 
 const TableRowItem = ({ album }) => {
-  // eslint-disable-next-line no-unused-vars
-  const [addAlbumHandler, deleteAlbumHandler, updateAlbumHandler] = useContext(AlbumMethodContext);
+  const [
+    addAlbumHandler,
+    deleteAlbumHandler,
+    updateAlbumHandler,
+  ] = useContext(AlbumMethodContext);
   const [isOpen, setIsOpen] = useState(false);
 
   const openHandler = () => {

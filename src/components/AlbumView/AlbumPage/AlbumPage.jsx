@@ -1,17 +1,19 @@
-import React, { useEffect, useState } from 'react';
+/* eslint-disable no-unused-vars */
+import React, { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { UserContext } from '../../../context/UserProvider';
 import VinylApiService from '../../../services/api.service';
 import './AlbumPage.css';
 
 const AlbumPage = () => {
-  const userId = '5f90c145b5a8ec412e4307f4';
   const { id } = useParams();
 
   const [album, setAlbum] = useState({});
+  const [currentUser] = useContext(UserContext);
 
   useEffect(() => {
     const getData = async () => {
-      const result = await VinylApiService.searchDataAsync(userId, id);
+      const result = await VinylApiService.searchDataAsync(currentUser.userId, id);
       setAlbum(result);
     };
     getData();
