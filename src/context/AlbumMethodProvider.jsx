@@ -39,14 +39,14 @@ const AlbumMethodProvider = ({ children }) => {
   const updateAlbumHandler = async (userId, id, changes) => {
     await ApiService.updateDataAsync(userId, id, changes);
     const newList = albums.map((album) => {
-      const newAlbum = {};
-
       if (album.id === id) {
+        const newAlbum = album;
         newAlbum.album = changes.album;
         newAlbum.artist = changes.artist;
         newAlbum.rating = changes.rating;
+        return newAlbum;
       }
-      return newAlbum;
+      return album;
     });
     setAlbums(newList);
   };

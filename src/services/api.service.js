@@ -88,6 +88,26 @@ const VinylApiService = {
     }
   },
 
+  // returns data in this format. The info to get a user
+  // is pulled from the token that is sent in the header.
+  // {
+  //   "userName": "username",
+  //   "userId": "userid"
+  // }
+
+  getUserInfo: async () => {
+    try {
+      const userResponse = await axios({
+        method: 'GET',
+        url: '/users',
+      });
+      return userResponse.data;
+    } catch (err) {
+      console.log(err.toString());
+      return null;
+    }
+  },
+
   generalRequestAsync: async (config) => axios(config),
 };
 
