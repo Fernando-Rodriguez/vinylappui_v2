@@ -32,11 +32,11 @@ const Login = () => {
     <div className="input-items">
       <h2>Login!</h2>
       <input
-        onChangeHandler={onUserChangeHandler}
+        onChange={(e) => onUserChangeHandler(e.target.value)}
         placeholder="enter username"
       />
       <input
-        onChangeHandler={onPassChange}
+        onChange={(e) => onPassChange(e.target.value)}
         placeholder="enter password"
         type="password"
       />
