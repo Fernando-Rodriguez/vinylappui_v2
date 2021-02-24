@@ -1,19 +1,19 @@
-import { useState, createContext } from 'react';
+import React, { useState, createContext } from 'react';
 
 export const SelectedAlbumContext = createContext();
 
-const SelectedAlbumProvider = (props) => {
+// eslint-disable-next-line react/prop-types
+const SelectedAlbumProvider = ({ children }) => {
+  const [selectedAlbum, setSelectedAlbum] = useState([]);
 
-    const [selectedAlbum, setSelectedAlbum] = useState([]);
-
-    return(
-        <SelectedAlbumContext.Provider value={[
-            selectedAlbum, 
-            setSelectedAlbum]}
-        >
-            {props.children}
-        </SelectedAlbumContext.Provider>
-    );
+  return (
+    <SelectedAlbumContext.Provider value={[
+      selectedAlbum,
+      setSelectedAlbum]}
+    >
+      {children}
+    </SelectedAlbumContext.Provider>
+  );
 };
 
 export default SelectedAlbumProvider;

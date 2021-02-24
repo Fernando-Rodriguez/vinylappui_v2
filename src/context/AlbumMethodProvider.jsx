@@ -1,71 +1,65 @@
-import { createContext, useContext } from 'react';
-import { AlbumProvider } from './AlbumProvider';
-import ApiService from "../services/api.service";
+import React, { createContext, useContext } from 'react';
+import { AlbumContext } from './AlbumProvider';
+import ApiService from '../services/api.service';
 
-const AlbumMethodContext = createContext();
+export const AlbumMethodContext = createContext();
 
-const AlbumMethodProvider = (props) => {
+// eslint-disable-next-line react/prop-types
+const AlbumMethodProvider = ({ children }) => {
+  const [albums, setAlbums] = useContext(AlbumContext);
 
-    const [
-        albums,
-        setAlbums,
-    ] = useContext(AlbumProvider);
-
-    const addAlbumHandler = async (album) => {
-        if(album !== null){
-          try{
-            //await ApiService.postDataAsync(album);
-            setAlbums([...albums, album]);
+  const addAlbumHandler = async (album) => {
+    if (album !== null) {
+      try {
+        // await ApiService.postDataAsync(album);
+        setAlbums([...albums, album]);
+      } catch (err) {
+        // eslint-disable-next-line no-console
+        console.log(err.ToString());
+      }
+    }
+  };
+  const deleteAlbumHandler = async (id) => {
+    if (id !== null) {
+      try {
+        // await ApiService.deleteDataAsync(id);
+        const filteredAlbums = albums.filter((album) => {
+          if (album.id !== id) {
+            return album;
           }
-          catch(err){
-            console.log(err.ToString());
-          }
-        }
-      };
-    
-      const deleteAlbumHandler = async (id) => {
-    
-        if(id !== null){
-          try{
-            //await ApiService.deleteDataAsync(id);
-            const filteredAlbums = albums.filter((album) => {
-              if (album.id !== id) {
-                return album;
-              }
-            });
-            setAlbums(filteredAlbums);
-          }
-          catch(err){
-            console.log(err.ToString());
-          }
-        }
-      };
-    
-      const updateAlbumHandler = async (userId, id, changes) => {
-    
-        await ApiService.updateDataAsync(userId, id, changes);
-    
-        const newList = albums.map((album) => {
-          if (album.id === id) {
-            album.album = changes.album;
-            album.artist = changes.artist;
-            album.rating = changes.rating;
-          }
-          return album;
+          return null;
         });
-        
-        setAlbums(newList);  
-      };
+        setAlbums(filteredAlbums);
+      } catch (err) {
+        // eslint-disable-next-line no-console
+        console.log(err.ToString());
+      }
+    }
+  };
+  const updateAlbumHandler = async (userId, id, changes) => {
+    await ApiService.updateDataAsync(userId, id, changes);
+    const newList = albums.map((album) => {
+      if (album.id === id) {
+        const newAlbum = album;
+        newAlbum.album = changes.album;
+        newAlbum.artist = changes.artist;
+        newAlbum.rating = changes.rating;
+        return newAlbum;
+      }
+      return album;
+    });
+    setAlbums(newList);
+  };
 
-    return(
-        <AlbumMethodContext.Provider value={[
-            addAlbumHandler,
-            deleteAlbumHandler,
-            updateAlbumHandler
-        ]}>
-            {props.children}
-        </AlbumMethodContext.Provider>
-    )
+  return (
+    <AlbumMethodContext.Provider value={[
+      addAlbumHandler,
+      deleteAlbumHandler,
+      updateAlbumHandler]}
+    >
+      {children}
+    </AlbumMethodContext.Provider>
+  );
 };
 
 export default AlbumMethodProvider;

@@ -1,19 +1,19 @@
-import { createContext, useState } from 'react';
+import React, { createContext, useState } from 'react';
 
 export const SearchContext = createContext();
 
-const SearchProvider = (props) => {
+// eslint-disable-next-line react/prop-types
+const SearchProvider = ({ children }) => {
+  const [search, setSearch] = useState('');
 
-    const [search, setSearch] = useState("");
-
-    return(
-        <SearchContext.Provider value={[
-            search, 
-            setSearch]}
-        >
-            {props.children}
-        </SearchContext.Provider>
-    );
+  return (
+    <SearchContext.Provider value={[
+      search,
+      setSearch]}
+    >
+      {children}
+    </SearchContext.Provider>
+  );
 };
 
 export default SearchProvider;
