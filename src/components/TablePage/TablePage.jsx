@@ -1,15 +1,34 @@
+/* eslint-disable no-unused-vars */
 import React, { useContext, useState } from 'react';
 import { AlbumContext } from '../../context/AlbumProvider';
 
 import AddAlbum from './AddAlbum/AddAlbum';
-import TableRow from './TableRow/TableRow';
+import TableRowItem from './TableRow/TableRowItem';
 
 import './TablePage.css';
 
 const TablePage = () => {
-  const [albums] = useContext(AlbumContext);
+  const [albums, setAlbums, filteredAlbums] = useContext(AlbumContext);
 
   const [addAlbumBool, setAddAlbumBool] = useState(false);
+
+  const TableRows = () => {
+    const newAlbums = filteredAlbums();
+
+    if (albums !== undefined) {
+      return (
+        <tbody className="table-row-body">
+          {newAlbums.map((album) => (
+            <TableRowItem key={album.id} album={album} />
+          ))}
+        </tbody>
+      );
+    }
+
+    return (
+      <div>Loading...</div>
+    );
+  };
 
   return (
     <div className="table-container">
@@ -35,7 +54,7 @@ const TablePage = () => {
             <th className="table-header-item">User</th>
           </tr>
         </thead>
-        <TableRow albums={albums} />
+        {TableRows()}
       </table>
     </div>
   );
