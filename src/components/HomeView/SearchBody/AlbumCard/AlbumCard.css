@@ -1,6 +1,8 @@
 .card-container {
-    height: 50.5%;
-    width: 30%;
+    width: 25vw;
+    height: 25vw;
+    min-width: 250px;
+    min-height: 250px;;
     margin: 1%;
     display: flex;
     flex-direction: column;
@@ -13,18 +15,18 @@
     transition: all 0.5s ease-in;
     transform-style: preserve-3d;
     position: relative;
-    background-color: black;
     outline: none;
 }
 
 .card-front {
-    height: 100%;
     width: 100%;
+    height: 100%;
     position:absolute;
     display: flex;
     flex-direction: column;
     position:absolute;
     backface-visibility: hidden;
+    transition: all 0.5s ease-in;
 }
 
 .card-back {
@@ -35,12 +37,12 @@
     width: 100%;
     backface-visibility: hidden;
     transform: rotateY(-180deg);
+    background-color: #292235;
+    box-shadow: 0 0 10px #2F2235;
 }
 
 .card-background > img {
     max-width: 100%;
-    max-height: 100%;
-   object-fit: contain
 }
 
 .card-background {
@@ -68,7 +70,7 @@
     font-size: 20px;
 }
 
-.card-container:hover {
+.card-front:hover {
     transform: scale(1.02);
     box-shadow: 0 0 10px #2F2235;
 }
@@ -77,7 +79,7 @@
     transform: rotateY(-180deg);
 }
 
-.card-container:hover .card-info {
+.card-front:hover .card-info {
     opacity: 100%;
 }
 

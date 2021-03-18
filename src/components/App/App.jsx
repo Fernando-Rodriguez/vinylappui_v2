@@ -29,15 +29,15 @@ const App = () => {
             <Route exact path="/login">
               <Login />
             </Route>
-            <SearchProvider>
-              <AlbumProvider>
-                <AlbumMethodProvider>
-                  <PrivateRoute path="/">
+            <PrivateRoute path="/">
+              <SearchProvider>
+                <AlbumProvider>
+                  <AlbumMethodProvider>
                     <SearchPage />
-                  </PrivateRoute>
-                </AlbumMethodProvider>
-              </AlbumProvider>
-            </SearchProvider>
+                  </AlbumMethodProvider>
+                </AlbumProvider>
+              </SearchProvider>
+            </PrivateRoute>
           </Switch>
         </UserProvider>
       </Router>

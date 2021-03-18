@@ -8,7 +8,11 @@ import TableRowItem from './TableRow/TableRowItem';
 import './TablePage.css';
 
 const TablePage = () => {
-  const [albums, setAlbums, filteredAlbums] = useContext(AlbumContext);
+  const [
+    albums,
+    setAlbums,
+    filteredAlbums,
+  ] = useContext(AlbumContext);
 
   const [addAlbumBool, setAddAlbumBool] = useState(false);
 

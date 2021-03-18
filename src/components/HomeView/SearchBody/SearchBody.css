@@ -1,7 +1,6 @@
 .searchbody-container {
-    padding: 1%;
+    max-height: 100%;
     width: 100%;
-    height: 100%;
     background-color: #60495A;
     display: flex;
     flex-direction: row;
