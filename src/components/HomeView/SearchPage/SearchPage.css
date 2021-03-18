@@ -4,13 +4,14 @@
     background: transparent;
     display: grid;
     grid-template-columns: 1fr 5fr;
-    grid-template-rows: 1fr 10fr 0.5fr;
+    grid-template-rows: 1fr 10.5fr 0.5fr;
 }
 
 .search-page-navbar {
     grid-column: 1;
     grid-row-start: 1;
-    grid-row-end: 4;
+    grid-row-end: 5;
+    background-color: #292235;
 }
 
 .search-page-body {
@@ -19,7 +20,7 @@
     background: #60495A;
 }
 
-.search-page-searchbar {   
+.search-page-searchbar {
     grid-row: 1;
     grid-column: 2;
     background: transparent;
