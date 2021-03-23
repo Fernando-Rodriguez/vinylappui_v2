@@ -32,9 +32,8 @@ const AlbumCard = ({ album, clickHandler }) => {
         role="button"
         tabIndex="0"
         onKeyDown={onKeyDownHandler}
-        onClick={() => clickHandler(album.id)}
       >
-        <MoreInfo album={album} />
+        <MoreInfo album={album} clickHandler={() => clickHandler(album.id)} />
       </div>
     </div>
   );

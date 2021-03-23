@@ -13,3 +13,19 @@
 .info-item-container {
   line-height: 10rem;
 }
+
+.info-click-button {
+  width: 50%;
+  height: 10%;
+  background-color: transparent;
+  color: inherit;
+  border: 2px solid #60495A;
+  transition: all 0.3s ease;
+}
+
+.info-click-button:hover {
+  outline: none;
+  background-color: #60495A;
+  box-shadow: 0 0 10px black;
+  cursor:pointer;
+}
