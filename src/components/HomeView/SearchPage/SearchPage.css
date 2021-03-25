@@ -3,26 +3,26 @@
     height: 100%;
     background: transparent;
     display: grid;
-    grid-template-columns: 1fr 5fr;
-    grid-template-rows: 1fr 10fr 0.5fr;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 5fr);
+    grid-template-rows: minmax(0, 1fr) minmax(0, 10fr) minmax(0, 0.5fr);
+}
+
+.search-page-searchbar {
+    grid-row: 1;
+    grid-column: 2;
+    background: transparent;
 }
 
 .search-page-navbar {
     grid-column: 1;
-    grid-row-start: 1;
-    grid-row-end: 4;
+    grid-row: 1/4;
+    background-color: #292235;
 }
 
 .search-page-body {
     grid-column: 2;
     grid-row: 2;
     background: #60495A;
-}
-
-.search-page-searchbar {   
-    grid-row: 1;
-    grid-column: 2;
-    background: transparent;
 }
 
 .search-page-footer {

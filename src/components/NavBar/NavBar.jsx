@@ -30,7 +30,7 @@ const NavBar = () => {
         />
       </div>
       <h3>
-        Welcome, {currentUser.userName}!
+        Welcome, {currentUser ? currentUser.userName : 'no one'}!
       </h3>
       <div className="navbar-links">
         <Link to="/" className="navbar-links-item">

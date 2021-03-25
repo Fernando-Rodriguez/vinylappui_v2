@@ -1,8 +1,7 @@
 .edit-full {
     height: 100%;
-    width: 80%;
+    width: 100%;
     background-color: black;
-    padding: 10px;
 }
 
 .main-container {
@@ -11,8 +10,12 @@
     justify-content: space-evenly;
     align-items: center;
     color: white;
-    border: 1px solid white;
-    padding: 10px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 0.3fr 0.5fr 0.2fr 0.2fr;
+}
+
+.main-container > input {
+    margin: 2px;
 }
 
 .edit-container {

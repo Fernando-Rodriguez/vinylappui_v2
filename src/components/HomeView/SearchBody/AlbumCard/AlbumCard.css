@@ -1,27 +1,48 @@
 .card-container {
+    width: 25vw;
+    height: 25vw;
+    min-width: 250px;
+    min-height: 250px;;
     margin: 1%;
-    width: 30%;
-    height: 50%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    position: relative;
     font-size: 20px;
     font-weight: bolder;
     color: #BFC3BA;
-    transition: all 0.1s ease-in;
     cursor: pointer;
+    transition: all 0.5s ease-in;
+    transform-style: preserve-3d;
+    position: relative;
+    outline: none;
 }
 
-.card-container img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
+.card-front {
     width: 100%;
     height: 100%;
+    position:absolute;
+    display: flex;
+    flex-direction: column;
+    position:absolute;
+    backface-visibility: hidden;
+    transition: all 0.5s ease-in;
+}
+
+.card-back {
+    top:0;
+    bottom:0;
+    position:absolute;
+    height: 100%;
+    width: 100%;
+    backface-visibility: hidden;
+    transform: rotateY(-180deg);
+    background-color: #292235;
+    box-shadow: 0 0 10px #2F2235;
+}
+
+.card-background > img {
+    max-width: 100%;
 }
 
 .card-background {
@@ -34,7 +55,6 @@
 .card-info {
     height: 50%;
     width: 50%;
-    position: absolute;
     background-color: rgba(0, 0, 0, 0.7);
     opacity: 0%;
     transition: all 0.2s ease-in;
@@ -43,17 +63,23 @@
     justify-content: center;
     align-items: center;
     text-align: center;
+    position: absolute;
 }
 
 .card-album, .card-artist {
     font-size: 20px;
 }
 
-.card-container:hover {
+.card-front:hover {
     transform: scale(1.02);
     box-shadow: 0 0 10px #2F2235;
 }
 
-.card-container:hover .card-info {
+.card-container:focus {
+    transform: rotateY(-180deg);
+}
+
+.card-front:hover .card-info {
     opacity: 100%;
 }
+

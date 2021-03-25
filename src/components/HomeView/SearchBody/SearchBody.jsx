@@ -21,6 +21,7 @@ const SearchBody = ({ album }) => {
     <div className="searchbody-container">
       {album.map((dBalbum) => (
         <AlbumCard
+          className="searchbody-cell"
           album={dBalbum}
           key={dBalbum.id}
           clickHandler={clickHandler}
