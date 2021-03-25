@@ -21,11 +21,11 @@ const TablePage = () => {
 
     if (albums !== undefined) {
       return (
-        <tbody className="table-row-body">
+        <div className="table-row-body">
           {newAlbums.map((album) => (
             <TableRowItem key={album.id} album={album} />
           ))}
-        </tbody>
+        </div>
       );
     }
 
@@ -49,17 +49,15 @@ const TablePage = () => {
           <i className="far fa-plus-square" />
         </div>
       </div>
-      <table className="table-whole">
-        <thead>
-          <tr className="table-header-row">
-            <th className="table-header-item">Artist</th>
-            <th className="table-header-item">Album</th>
-            <th className="table-header-item">Rating</th>
-            <th className="table-header-item">User</th>
-          </tr>
-        </thead>
+      <div className="table-whole">
+        <div className="table-header-row">
+          <p className="table-header-item">Artist</p>
+          <p className="table-header-item">Album</p>
+          <p className="table-header-item">Rating</p>
+          <p className="table-header-item">User</p>
+        </div>
         {TableRows()}
-      </table>
+      </div>
     </div>
   );
 };

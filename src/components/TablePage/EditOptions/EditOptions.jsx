@@ -47,26 +47,24 @@ const EditOptions = ({ album, openHandler }) => {
   return (
     <div className="edit-full">
       <div className="main-container">
-        <div className="edit-container">
-          <input
-            placeholder={album.artist}
-            type="text"
-            value={artistName}
-            onChange={handleArtistChange}
-          />
-          <input
-            placeholder={album.album}
-            type="text"
-            value={albumName}
-            onChange={handleAlbumChange}
-          />
-          <input
-            placeholder={album.rating}
-            type="text"
-            value={ratingItem}
-            onChange={handleRatingChange}
-          />
-        </div>
+        <input
+          placeholder={album.artist}
+          type="text"
+          value={artistName}
+          onChange={handleArtistChange}
+        />
+        <input
+          placeholder={album.album}
+          type="text"
+          value={albumName}
+          onChange={handleAlbumChange}
+        />
+        <input
+          placeholder={album.rating}
+          type="text"
+          value={ratingItem}
+          onChange={handleRatingChange}
+        />
         <div className="edit-img-container">
           <img src={album.imageUrl} alt="Album Artwork" />
         </div>

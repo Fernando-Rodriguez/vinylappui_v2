@@ -1,7 +1,9 @@
 .row-container {
     width: 100%;
-    margin: 1px;
     background-color: transparent;
+    display: grid;
+    grid-template-columns: 1fr 1fr 0.3fr 0.5fr 0.2fr 0.2fr;
+    padding: 0.5% 0;
 }
 
 .open {
