@@ -1,22 +1,30 @@
+:root {
+    --light-primary: #60495A;
+    --med-primary: #3F3244;
+    --dark-primary: #2F2235;
+    --light-secondary: #BFC3BA;
+    --dark-dark: #A9ACA9;
+}
+
 .table-container {
     width: 100%;
     height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
     align-items: center;
     overflow-y: scroll;
     font-size: 20px;
 }
 
 .table-whole{
-    width: 90%;
-    color: white;
+    width: 98%;
+    color: var(--light-secondary);
     display: grid;
     grid-template-columns: 1fr;
     padding: 10px;
     border-radius: 2px;
-    border: solid white 1px;
+    border: solid var(--light-secondary) 1px;
+    background-color: var(--med-primary);
 }
 
 .table-header-row {
@@ -25,43 +33,22 @@
     grid-template-columns: 1fr 1fr 0.3fr 0.5fr 0.2fr 0.2fr;
 }
 
-.add-album-button-container {
-    background-color: transparent;
-    width: 100%;
+.add-albums-container {
+    width: 98%;
+    height: 98%;
+    max-height: 50px;
     display: flex;
-    justify-content: flex-end;
-    align-items: center;
+    flex-direction: row-reverse;
 }
 
-.button-item {
-    width: 150px;
-    padding: 10px;
-    margin: 5px;
-    margin-right: 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 1px;
-    color: white;
-    border: 1px solid white;
-}
-
-.button-item:hover{
-    border: 1px solid black;
-    background: gray;
-    cursor: pointer;
-}
-
-.isActive {
-    border: 1px solid black;
-    background: gray;
-    font-weight: bolder;
-}
-
-.button-item span {
-    margin: 0 5px;
+.add-albums-button {
+    width: 100px;
 }
 
 .table-row-body {
     width: 100%;
+}
+
+.margined {
+    margin-left: 5px;
 }

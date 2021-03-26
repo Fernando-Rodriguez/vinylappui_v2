@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React, { useContext, useState } from 'react';
 import { UserContext } from '../../context/UserProvider';
+import CustomButton from '../SharedComponents/CustomButton';
 import './Login.css';
 
 const Login = () => {
@@ -29,18 +30,34 @@ const Login = () => {
   };
 
   const LoginSection = () => (
-    <div className="input-items">
-      <h2>Login!</h2>
-      <input
-        onChange={(e) => onUserChangeHandler(e.target.value)}
-        placeholder="enter username"
-      />
-      <input
-        onChange={(e) => onPassChange(e.target.value)}
-        placeholder="enter password"
-        type="password"
-      />
-      <button type="button" onClick={LoginUser}>Sign In</button>
+    <div className="input-items-container">
+      <div className="input-items">
+        <h1>Welcome to the Vinyl App</h1>
+        <h2>Sign In Here</h2>
+        <div className="input-field-container">
+          <input
+            className="login-input"
+            onChange={(e) => onUserChangeHandler(e.target.value)}
+            placeholder="enter username"
+          />
+        </div>
+        <div className="input-field-container">
+
+          <input
+            className="login-input"
+            onChange={(e) => onPassChange(e.target.value)}
+            placeholder="enter password"
+            type="password"
+          />
+        </div>
+        {/* <button type="button" onClick={LoginUser}>Sign In</button> */}
+        <CustomButton
+          clickHandler={LoginUser}
+          theme="light"
+        >
+          Sign In
+        </CustomButton>
+      </div>
     </div>
   );
 

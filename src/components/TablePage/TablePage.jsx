@@ -6,6 +6,7 @@ import AddAlbum from './AddAlbum/AddAlbum';
 import TableRowItem from './TableRow/TableRowItem';
 
 import './TablePage.css';
+import CustomButton from '../SharedComponents/CustomButton';
 
 const TablePage = () => {
   const [
@@ -36,18 +37,15 @@ const TablePage = () => {
 
   return (
     <div className="table-container">
-      <div
-        className="add-album-button-container"
-        role="button"
-        tabIndex="0"
-        onClick={() => setAddAlbumBool(!addAlbumBool)}
-        onKeyDown={() => {}}
-      >
-        <div className={addAlbumBool ? 'button-item isActive' : 'button-item'}>
-          {addAlbumBool && <AddAlbum className="add-albums" />}
-          <span>Add Album</span>
-          <i className="far fa-plus-square" />
-        </div>
+      <div className="add-albums-container">
+        <CustomButton
+          customStyle="med-button"
+          clickHandler={() => setAddAlbumBool(!addAlbumBool)}
+        >
+          Add Album
+          <i className="margined far fa-plus-square" />
+        </CustomButton>
+        {addAlbumBool && <AddAlbum />}
       </div>
       <div className="table-whole">
         <div className="table-header-row">
