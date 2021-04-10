@@ -42,7 +42,7 @@ const TablePage = () => {
           customStyle="med-button"
           clickHandler={() => setAddAlbumBool(!addAlbumBool)}
         >
-          Add Album
+          {!addAlbumBool ? 'Add Album' : 'Close' }
           <i className="margined far fa-plus-square" />
         </CustomButton>
         {addAlbumBool && <AddAlbum />}

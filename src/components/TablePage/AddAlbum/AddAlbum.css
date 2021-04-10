@@ -1,7 +1,47 @@
+:root {
+  --light-primary: #60495A;
+  --med-primary: #3F3244 ;
+  --dark-primary: #2F2235;
+  --light-secondary: #BFC3BA;
+  --dark-dark: #A9ACA9;
+}
+
 .add-container {
+  padding: 1% 0%;
+  height: 100%;
   width: 100%;
-  background-color: orange;
+  color: var(--light-secondary);
   display: flex;
   justify-items: center;
   align-items: center;
+  background-color: transparent;
+}
+
+.add-input-field {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-items: center;
+  align-items: center;
+  border: 1px solid rgb(47, 34, 53, 0.3);
+  transition: all 0.3s ease;
+}
+
+.add-input-actual {
+  width: 100%;
+  height: 100%;
+  border: none;
+  background-color: transparent;
+  transition: all 0.3s ease;
+  font-size: 15px;
+}
+
+.add-input-actual:focus {
+  outline:none;
+  color: var(--light-secondary);
+}
+
+.add-album-button {
+  width: 20%;
+  height: 100%;
 }
