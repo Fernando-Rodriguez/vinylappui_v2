@@ -1,11 +1,14 @@
 /* eslint-disable no-console */
 import React, { useContext, useState } from 'react';
 import { AlbumMethodContext } from '../../../context/AlbumMethodProvider';
+import { UserContext } from '../../../context/UserProvider';
+import CustomButton from '../../SharedComponents/CustomButton';
 import './AddAlbum.css';
 
 const AddAlbum = () => {
   const [artistName, setArtistName] = useState('');
   const [albumName, setAlbumName] = useState('');
+  const [currentUser] = useContext(UserContext);
   // eslint-disable-next-line no-unused-vars
   const [addAlbumHandler] = useContext(AlbumMethodContext);
 
@@ -13,7 +16,7 @@ const AddAlbum = () => {
     await addAlbumHandler({
       artist: artistName,
       album: albumName,
-      user: 'Frod080',
+      user: currentUser.userName,
     });
     console.log(`${artistName} ${albumName}`);
     setArtistName('');
@@ -22,21 +25,31 @@ const AddAlbum = () => {
 
   return (
     <div className="add-container">
-      <div className="add-input-container">
+      <div className="add-input-field">
         <input
+          className="add-input-actual"
           type="text"
           placeholder="Artist Name"
           value={artistName}
           onChange={(e) => setArtistName(e.target.value)}
         />
+      </div>
+      <div className="add-input-field">
         <input
+          className="add-input-actual"
           type="text"
           placeholder="Album Name"
           value={albumName}
           onChange={(e) => setAlbumName(e.target.value)}
         />
-        <button type="button" onClick={buttonHandler}>Add Album!</button>
       </div>
+      <CustomButton
+        customStyle="med-button"
+        clickHandler={() => buttonHandler()}
+      >
+        Save New Album!
+        <i className="margined far fa-plus-square" />
+      </CustomButton>
     </div>
   );
 };

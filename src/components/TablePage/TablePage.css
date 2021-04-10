@@ -34,11 +34,14 @@
 }
 
 .add-albums-container {
+    padding: 10px 0;
     width: 98%;
     height: 98%;
-    max-height: 50px;
+    max-height: 80px;
     display: flex;
     flex-direction: row-reverse;
+    justify-items: center;
+    align-items: center;
 }
 
 .add-albums-button {

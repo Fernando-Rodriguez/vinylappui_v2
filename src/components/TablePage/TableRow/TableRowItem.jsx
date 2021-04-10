@@ -19,7 +19,7 @@ const TableRowItem = ({ album }) => {
 
   return (
     <div className="row-container-main">
-      <div className={isOpen ? 'row-container open' : 'row-container'}>
+      <div className={isOpen ? 'row-container open' : 'row-container'} contentEditable="true">
         <p className="row-item">{album.artist}</p>
         <p className="row-item">{album.album}</p>
         <p className="row-item">{album.rating}</p>

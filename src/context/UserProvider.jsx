@@ -42,6 +42,10 @@ const UserProvider = ({ children }) => {
     setToken(null);
   };
 
+  const UserCreation = async (email, password) => {
+    await UserService.createUser(email, password);
+  };
+
   return (
     <UserContext.Provider value={[
       currentUser,
@@ -49,6 +53,7 @@ const UserProvider = ({ children }) => {
       SignInHandler,
       SignOutHandler,
       SetUser,
+      UserCreation,
     ]}
     >
       {children}

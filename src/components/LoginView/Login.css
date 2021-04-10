@@ -53,6 +53,7 @@
     justify-content: space-evenly;
     align-items: center;
     text-align: center;
+    background-color: var(--med-primary);
 }
 
 .input-field-container {
@@ -83,4 +84,8 @@
 .input-field-container:focus-within {
     box-shadow: 0 0 10px #2F2235;
     background-color: var(--dark-primary);
+}
+
+.input-create-account {
+    cursor: pointer;
 }

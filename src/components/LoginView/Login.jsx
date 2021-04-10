@@ -10,11 +10,14 @@ const Login = () => {
     token,
     SignInHandler,
     SignOutHandler,
+    SetUser,
+    UserCreation,
   ] = useContext(UserContext);
 
   const [userInput, setUserInput] = useState('');
   const [passInput, setPassInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [isUserCreated, setIsUserCreated] = useState(false);
 
   const LoginUser = async () => {
     setIsLoading(true);
@@ -27,6 +30,14 @@ const Login = () => {
 
   const onPassChange = (value) => {
     setPassInput(value);
+  };
+
+  const onCreateAccount = async () => {
+    if (userInput && passInput) {
+      setIsLoading(true);
+      await UserCreation(userInput, passInput);
+      setIsLoading(false);
+    }
   };
 
   const LoginSection = () => (
@@ -42,7 +53,6 @@ const Login = () => {
           />
         </div>
         <div className="input-field-container">
-
           <input
             className="login-input"
             onChange={(e) => onPassChange(e.target.value)}
@@ -57,6 +67,15 @@ const Login = () => {
         >
           Sign In
         </CustomButton>
+      </div>
+      <div
+        className="input-create-account"
+        onClick={onCreateAccount}
+        role="button"
+        tabIndex="0"
+        onKeyDown={() => true}
+      >
+        Create Account
       </div>
     </div>
   );

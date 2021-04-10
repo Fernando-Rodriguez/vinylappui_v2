@@ -36,6 +36,30 @@ const UserService = {
     TokenService.removeToken();
     VinylApiService.removeApiHeaders();
   },
+
+  async createUser(email, password) {
+    const requestData = {
+      method: 'post',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      url: `${process.env.REACT_APP_API_BASE}/users/new`,
+      data: {
+        userName: email,
+        userSecret: password,
+      },
+    };
+
+    try {
+      // makes the request.
+      await VinylApiService.generalRequestAsync(requestData);
+      return true;
+    } catch (e) {
+      // eslint-disable-next-line no-console
+      console.log(e);
+      return null;
+    }
+  },
 };
 
 export default UserService;

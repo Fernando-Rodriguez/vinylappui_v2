@@ -66,8 +66,7 @@ const VinylApiService = {
 
     // Method must be implemented in api.
     try {
-      // const response = await axios.delete(`/ownedalbums/${id}`);
-      // return response.data;
+      // await axios.delete(`/ownedalbums/${id}`);
     } catch (e) {
       console.log(e);
     }
