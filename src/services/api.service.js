@@ -60,13 +60,13 @@ const VinylApiService = {
     }
   },
 
-  deleteDataAsync: async () => {
+  deleteDataAsync: async (id) => {
     VinylApiService.init();
     VinylApiService.setApiHeaders();
 
     // Method must be implemented in api.
     try {
-      // await axios.delete(`/ownedalbums/${id}`);
+      await axios.delete(`/ownedalbums/${id}`);
     } catch (e) {
       console.log(e);
     }
@@ -95,6 +95,9 @@ const VinylApiService = {
   // }
 
   getUserInfo: async () => {
+    VinylApiService.init();
+    VinylApiService.setApiHeaders();
+
     try {
       const userResponse = await axios({
         method: 'GET',
@@ -105,6 +108,33 @@ const VinylApiService = {
       console.log(err.toString());
       return null;
     }
+  },
+
+  getGroupData: () => {
+    VinylApiService.init();
+    VinylApiService.setApiHeaders();
+    return [
+      {
+        groupId: '60735d8a76ad9e7ab661498d',
+        groupName: 'Family Group!',
+        groupAlbums: [
+          {
+            id: '60736504b50781aa976978fa',
+            user: 'J_110',
+            album: 'Catch For Us the Foxes',
+            artist: 'MewithoutYou',
+            imageUrl:
+              'https://i.scdn.co/image/ab67616d0000b2730c7a52516acf1393f6f75b2f',
+            rating: 5,
+          },
+        ],
+      },
+      {
+        groupId: '60735d8a76ad9e7ab61498d',
+        groupName: 'Second Group!',
+        groupAlbums: [],
+      },
+    ];
   },
 
   generalRequestAsync: async (config) => axios(config),

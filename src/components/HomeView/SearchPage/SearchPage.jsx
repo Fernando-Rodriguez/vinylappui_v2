@@ -1,7 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React, { useContext, useEffect } from 'react';
 import { Route, Switch, useRouteMatch } from 'react-router-dom';
-import VinylApiService from '../../../services/api.service';
 import { AlbumContext } from '../../../context/AlbumProvider';
 import { UserContext } from '../../../context/UserProvider';
 
@@ -10,13 +9,17 @@ import NavBar from '../../NavBar/NavBar';
 import SearchBody from '../SearchBody/SearchBody';
 import SearchBar from '../../SearchBar/SearchBar';
 import TablePage from '../../TablePage/TablePage';
-import AlbumPage from '../../AlbumView/AlbumPage/AlbumPage';
 
 import './SearchPage.css';
 
 // This will work as the main container for the searchpage.
 const SearchPage = () => {
-  const [albums, setAlbums, filteredAlbums] = useContext(AlbumContext);
+  const [
+    albums,
+    setAlbums,
+    filteredAlbums,
+    RefreshAlbums,
+  ] = useContext(AlbumContext);
   const [
     currentUser,
     token,
@@ -29,8 +32,7 @@ const SearchPage = () => {
 
   useEffect(() => {
     const getAlbums = async () => {
-      const dbAlbums = await VinylApiService.getDataAsync();
-      await setAlbums(dbAlbums);
+      await RefreshAlbums();
       if (!currentUser.userName) {
         SetUser();
       }
@@ -53,9 +55,6 @@ const SearchPage = () => {
           </Route>
           <Route exact path="/add-album">
             <TablePage />
-          </Route>
-          <Route exact path="/album/:id">
-            <AlbumPage />
           </Route>
         </Switch>
       </div>

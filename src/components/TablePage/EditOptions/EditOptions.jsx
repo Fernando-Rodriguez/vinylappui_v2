@@ -5,9 +5,9 @@ import { UserContext } from '../../../context/UserProvider';
 import './EditOptions.css';
 
 const EditOptions = ({ album, openHandler }) => {
-  const [artistName, setArtist] = useState('');
-  const [albumName, setAlbum] = useState('');
-  const [ratingItem, setRating] = useState(0);
+  const [artistName, setArtist] = useState(album.artist);
+  const [albumName, setAlbum] = useState(album.album);
+  const [ratingItem, setRating] = useState(album.rating);
   // eslint-disable-next-line no-unused-vars
   const [
     addAlbumHandler,
