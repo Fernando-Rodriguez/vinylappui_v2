@@ -3,7 +3,6 @@ import { useHistory } from 'react-router-dom';
 import AlbumCard from './AlbumCard/AlbumCard';
 import './SearchBody.css';
 
-// This will hold the album cards
 const SearchBody = ({ album }) => {
   const history = useHistory();
 
@@ -13,7 +12,7 @@ const SearchBody = ({ album }) => {
 
   if (album === undefined || album === null) {
     return (
-      <div>oops</div>
+      <div>No albums to show...</div>
     );
   }
 

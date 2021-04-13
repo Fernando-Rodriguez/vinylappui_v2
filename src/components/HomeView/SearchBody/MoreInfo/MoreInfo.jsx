@@ -4,13 +4,6 @@ import './MoreInfo.css';
 
 const MoreInfo = ({ album }) => (
   <div className="info-container">
-    {/* <button
-        onClick={clickHandler}
-        type="button"
-        className="info-click-button"
-      >
-        Check Out Album!
-      </button> */}
     <div className="info-item-header">
       <div className="info-item">{ album.artist }</div>
       <div className="info-item">{ album.album }</div>

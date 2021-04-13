@@ -9,7 +9,6 @@ import NavBar from '../../NavBar/NavBar';
 import SearchBody from '../SearchBody/SearchBody';
 import SearchBar from '../../SearchBar/SearchBar';
 import TablePage from '../../TablePage/TablePage';
-import AlbumPage from '../../AlbumView/AlbumPage/AlbumPage';
 
 import './SearchPage.css';
 
@@ -56,9 +55,6 @@ const SearchPage = () => {
           </Route>
           <Route exact path="/add-album">
             <TablePage />
-          </Route>
-          <Route exact path="/album/:id">
-            <AlbumPage />
           </Route>
         </Switch>
       </div>

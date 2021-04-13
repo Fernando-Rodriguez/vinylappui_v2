@@ -1,15 +1,18 @@
 import React, { createContext, useContext, useState } from 'react';
 import VinylApiService from '../services/api.service';
 import { SearchContext } from './SearchContext';
-// import { UserContext } from './UserProvider';
 
 export const AlbumContext = createContext();
 
 // eslint-disable-next-line react/prop-types
 const AlbumProvider = ({ children }) => {
   const [search] = useContext(SearchContext);
-  // const [currentUser] = useContext(UserContext);
   const [albums, setAlbums] = useState([]);
+
+  // CORE ALBUMS DOES NOT GET MUTATED - EVER ------
+  const [coreAlbums, setCoreAlbums] = useState([]);
+  // DO NOT TOUCH ---------------------------------
+
   const [groups, setGroups] = useState([]);
   const [currentGroup, setCurrentGroup] = useState('');
 
@@ -17,14 +20,15 @@ const AlbumProvider = ({ children }) => {
     const dbAlbums = await VinylApiService.getDataAsync();
     const dbGroup = VinylApiService.getGroupData();
     setAlbums(dbAlbums);
+    setCoreAlbums(dbAlbums);
     setGroups(dbGroup);
   };
 
-  const GroupSelected = (id) => {
+  const GroupSelected = async (id) => {
     setCurrentGroup(id);
     const filteredGroup = groups.filter((group) => group.groupId === id);
     const addGroupAlbums = filteredGroup[0].groupAlbums;
-    const newAlbumList = [...albums, ...addGroupAlbums];
+    const newAlbumList = [...coreAlbums, ...addGroupAlbums];
     setAlbums(newAlbumList);
   };
 
