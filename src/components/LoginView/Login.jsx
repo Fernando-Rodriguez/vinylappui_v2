@@ -17,7 +17,6 @@ const Login = () => {
   const [userInput, setUserInput] = useState('');
   const [passInput, setPassInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const [isUserCreated, setIsUserCreated] = useState(false);
 
   const LoginUser = async () => {
     setIsLoading(true);
@@ -60,7 +59,6 @@ const Login = () => {
             type="password"
           />
         </div>
-        {/* <button type="button" onClick={LoginUser}>Sign In</button> */}
         <CustomButton
           clickHandler={LoginUser}
           theme="light"

@@ -17,6 +17,10 @@ const TablePage = () => {
 
   const [addAlbumBool, setAddAlbumBool] = useState(false);
 
+  const closeHandler = () => {
+    setAddAlbumBool(!addAlbumBool);
+  };
+
   const TableRows = () => {
     const newAlbums = filteredAlbums();
 
@@ -45,7 +49,7 @@ const TablePage = () => {
           {!addAlbumBool ? 'Add Album' : 'Close' }
           <i className="margined far fa-plus-square" />
         </CustomButton>
-        {addAlbumBool && <AddAlbum />}
+        {addAlbumBool && <AddAlbum closeHandler={closeHandler} />}
       </div>
       <div className="table-whole">
         <div className="table-header-row">

@@ -5,7 +5,7 @@ import { UserContext } from '../../../context/UserProvider';
 import CustomButton from '../../SharedComponents/CustomButton';
 import './AddAlbum.css';
 
-const AddAlbum = () => {
+const AddAlbum = ({ closeHandler }) => {
   const [artistName, setArtistName] = useState('');
   const [albumName, setAlbumName] = useState('');
   const [currentUser] = useContext(UserContext);
@@ -13,14 +13,19 @@ const AddAlbum = () => {
   const [addAlbumHandler] = useContext(AlbumMethodContext);
 
   const buttonHandler = async () => {
-    await addAlbumHandler({
-      artist: artistName,
-      album: albumName,
-      user: currentUser.userName,
-    });
-    console.log(`${artistName} ${albumName}`);
-    setArtistName('');
-    setAlbumName('');
+    if (
+      (artistName != null || undefined || '')
+      && (albumName != null || undefined || '')
+    ) {
+      await addAlbumHandler({
+        artist: artistName,
+        album: albumName,
+        user: currentUser.userName,
+      });
+      setArtistName('');
+      setAlbumName('');
+      closeHandler();
+    }
   };
 
   return (
