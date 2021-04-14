@@ -1,4 +1,4 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext, useEffect, useState } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import VinylApiService from '../services/api.service';
 import TokenService from '../services/token.service';
@@ -22,17 +22,18 @@ const UserProvider = ({ children }) => {
   const location = useLocation();
   const { from } = location.state || { from: { pathname: '/' } };
 
-  const SetUser = async () => {
-    const user = await VinylApiService.getUserInfo();
-    await setCurrentUser(user);
-  };
+  useEffect(() => {
+    const SetUser = async () => {
+      const user = await VinylApiService.getUserInfo();
+      setCurrentUser(user);
+    };
+    SetUser();
+  }, [token]);
 
   const SignInHandler = async (email, password) => {
     if (!token) {
       const userToken = await UserService.login(email, password);
-      await setToken(userToken);
-      await SetUser();
-
+      setToken(userToken);
       history.replace(from);
     }
   };
@@ -47,14 +48,13 @@ const UserProvider = ({ children }) => {
   };
 
   return (
-    <UserContext.Provider value={[
+    <UserContext.Provider value={{
       currentUser,
       token,
       SignInHandler,
       SignOutHandler,
-      SetUser,
       UserCreation,
-    ]}
+    }}
     >
       {children}
     </UserContext.Provider>

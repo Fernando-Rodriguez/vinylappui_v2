@@ -51,13 +51,8 @@ const VinylApiService = {
     VinylApiService.init();
     VinylApiService.setApiHeaders();
 
-    try {
-      const response = await axios.post('/ownedalbums', dataPacket);
-      return response.data;
-    } catch (e) {
-      console.log(e.toString());
-      return null;
-    }
+    const response = await axios.post('/ownedalbums', dataPacket);
+    return response.data;
   },
 
   deleteDataAsync: async (id) => {
@@ -98,43 +93,24 @@ const VinylApiService = {
     VinylApiService.init();
     VinylApiService.setApiHeaders();
 
-    try {
-      const userResponse = await axios({
-        method: 'GET',
-        url: '/users',
-      });
-      return userResponse.data;
-    } catch (err) {
-      console.log(err.toString());
-      return null;
-    }
+    const userResponse = await axios({
+      method: 'GET',
+      url: '/users',
+    });
+
+    return userResponse.data;
   },
 
-  getGroupData: () => {
+  getGroupData: async () => {
     VinylApiService.init();
     VinylApiService.setApiHeaders();
-    return [
-      {
-        groupId: '60735d8a76ad9e7ab661498d',
-        groupName: 'Family Group!',
-        groupAlbums: [
-          {
-            id: '60736504b50781aa976978fa',
-            user: 'J_110',
-            album: 'Catch For Us the Foxes',
-            artist: 'MewithoutYou',
-            imageUrl:
-              'https://i.scdn.co/image/ab67616d0000b2730c7a52516acf1393f6f75b2f',
-            rating: 5,
-          },
-        ],
-      },
-      {
-        groupId: '60735d8a76ad9e7ab61498d',
-        groupName: 'Second Group!',
-        groupAlbums: [],
-      },
-    ];
+
+    const groupData = await axios({
+      method: 'GET',
+      url: '/group',
+    });
+
+    return groupData.data;
   },
 
   generalRequestAsync: async (config) => axios(config),

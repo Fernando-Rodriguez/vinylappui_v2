@@ -1,19 +1,15 @@
 /* eslint-disable no-unused-vars */
 import React, { useContext, useState } from 'react';
-import { AlbumContext } from '../../context/AlbumProvider';
-
+import { AlbumContext } from '../../../context/AlbumProvider';
 import AddAlbum from './AddAlbum/AddAlbum';
 import TableRowItem from './TableRow/TableRowItem';
-
-import './TablePage.css';
 import CustomButton from '../SharedComponents/CustomButton';
+import './TablePage.css';
 
 const TablePage = () => {
-  const [
+  const {
     albums,
-    setAlbums,
-    filteredAlbums,
-  ] = useContext(AlbumContext);
+  } = useContext(AlbumContext);
 
   const [addAlbumBool, setAddAlbumBool] = useState(false);
 
@@ -22,12 +18,10 @@ const TablePage = () => {
   };
 
   const TableRows = () => {
-    const newAlbums = filteredAlbums();
-
     if (albums !== undefined) {
       return (
         <div className="table-row-body">
-          {newAlbums.map((album) => (
+          {albums.map((album) => (
             <TableRowItem key={album.id} album={album} />
           ))}
         </div>

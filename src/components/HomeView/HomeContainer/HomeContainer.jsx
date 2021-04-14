@@ -5,40 +5,20 @@ import { AlbumContext } from '../../../context/AlbumProvider';
 import { UserContext } from '../../../context/UserProvider';
 
 import MainFooter from '../MainFooter/MainFooter';
-import NavBar from '../../NavBar/NavBar';
+import NavBar from '../NavBar/NavBar';
 import SearchBody from '../SearchBody/SearchBody';
-import SearchBar from '../../SearchBar/SearchBar';
-import TablePage from '../../TablePage/TablePage';
+import SearchBar from '../SearchBar/SearchBar';
+import TablePage from '../TablePage/TablePage';
 
 import './SearchPage.css';
 
 // This will work as the main container for the searchpage.
-const SearchPage = () => {
-  const [
+const HomeContainer = () => {
+  const {
     albums,
-    setAlbums,
-    filteredAlbums,
-    RefreshAlbums,
-  ] = useContext(AlbumContext);
-  const [
-    currentUser,
-    token,
-    SignInHandler,
-    SignOutHandler,
-    SetUser,
-  ] = useContext(UserContext);
+  } = useContext(AlbumContext);
 
   const { path } = useRouteMatch();
-
-  useEffect(() => {
-    const getAlbums = async () => {
-      await RefreshAlbums();
-      if (!currentUser.userName) {
-        SetUser();
-      }
-    };
-    getAlbums();
-  }, []);
 
   return (
     <div className="search-page-container">
@@ -51,7 +31,7 @@ const SearchPage = () => {
       <div className="search-page-body">
         <Switch>
           <Route exact path={`${path}`}>
-            <SearchBody album={filteredAlbums()} />
+            <SearchBody album={albums} />
           </Route>
           <Route exact path="/add-album">
             <TablePage />
@@ -65,4 +45,4 @@ const SearchPage = () => {
   );
 };
 
-export default SearchPage;
+export default HomeContainer;

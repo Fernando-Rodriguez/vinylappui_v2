@@ -1,16 +1,15 @@
 /* eslint-disable no-console */
 import React, { useContext, useState } from 'react';
-import { AlbumMethodContext } from '../../../context/AlbumMethodProvider';
-import { UserContext } from '../../../context/UserProvider';
+import { AlbumMethodContext } from '../../../../context/AlbumMethodProvider';
+import { UserContext } from '../../../../context/UserProvider';
 import CustomButton from '../../SharedComponents/CustomButton';
 import './AddAlbum.css';
 
 const AddAlbum = ({ closeHandler }) => {
   const [artistName, setArtistName] = useState('');
   const [albumName, setAlbumName] = useState('');
-  const [currentUser] = useContext(UserContext);
-  // eslint-disable-next-line no-unused-vars
-  const [addAlbumHandler] = useContext(AlbumMethodContext);
+  const { currentUser } = useContext(UserContext);
+  const { addAlbumHandler } = useContext(AlbumMethodContext);
 
   const buttonHandler = async () => {
     if (

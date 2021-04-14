@@ -1,4 +1,10 @@
-import React, { createContext, useContext, useState } from 'react';
+/* eslint-disable no-console */
+import React, {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
 import VinylApiService from '../services/api.service';
 import { SearchContext } from './SearchContext';
 
@@ -15,25 +21,54 @@ const AlbumProvider = ({ children }) => {
 
   const [groups, setGroups] = useState([]);
   const [currentGroup, setCurrentGroup] = useState('');
+  const [refreshKey, setRefreshKey] = useState(false);
 
-  const RefreshAlbums = async () => {
-    const dbAlbums = await VinylApiService.getDataAsync();
-    const dbGroup = VinylApiService.getGroupData();
-    setAlbums(dbAlbums);
-    setCoreAlbums(dbAlbums);
-    setGroups(dbGroup);
-  };
+  // const RefreshAlbums = async () => {
+  //   try {
+  //     const dbAlbums = await VinylApiService.getDataAsync();
+  //     const dbGroup = await VinylApiService.getGroupData();
+  //     console.log(dbGroup);
+  //     setAlbums(dbAlbums);
+  //     setCoreAlbums(dbAlbums);
+  //     setGroups(dbGroup);
+  //   } catch (err) {
+  //     console.log(err.toString());
+  //   }
+  // };
 
-  const GroupSelected = async (id) => {
-    setCurrentGroup(id);
-    const filteredGroup = groups.filter((group) => group.groupId === id);
-    const addGroupAlbums = filteredGroup[0].groupAlbums;
-    const newAlbumList = [...coreAlbums, ...addGroupAlbums];
-    setAlbums(newAlbumList);
-  };
+  useEffect(() => {
+    const RefreshAlbums = async () => {
+      try {
+        const dbAlbums = await VinylApiService.getDataAsync();
+        const dbGroup = await VinylApiService.getGroupData();
+        console.log(dbGroup);
+        setAlbums(dbAlbums);
+        setCoreAlbums(dbAlbums);
+        setGroups(dbGroup);
+      } catch (err) {
+        console.log(err.toString());
+      }
+    };
+    RefreshAlbums();
+  }, [refreshKey]);
 
-  const filteredAlbums = () => {
-    if (search) {
+  useEffect(() => {
+    try {
+      if (currentGroup.groupId === 'all') {
+        setAlbums(coreAlbums);
+      } else {
+        const filteredGroup = groups.filter((group) => group.groupId === currentGroup.groupId);
+        const addGroupAlbums = filteredGroup[0].groupAlbums;
+        const newAlbumList = [...coreAlbums, ...addGroupAlbums];
+        setAlbums(newAlbumList);
+      }
+    } catch (err) {
+      console.log(err.toString());
+    }
+  }, [currentGroup]);
+
+  useEffect(() => {
+    if (search !== '') {
       const list = albums.filter((album) => {
         const inputToLower = search.toLowerCase();
         return (
@@ -41,22 +76,22 @@ const AlbumProvider = ({ children }) => {
           || album.album.toLowerCase().includes(inputToLower)
         );
       });
-      return list;
+      setAlbums(list);
     }
-    return albums;
-  };
+    return () => setAlbums(coreAlbums);
+  }, [search]);
 
   return (
     <AlbumContext.Provider
-      value={[
+      value={{
         albums,
         setAlbums,
-        filteredAlbums,
-        RefreshAlbums,
         groups,
-        GroupSelected,
+        setCurrentGroup,
         currentGroup,
-      ]}
+        setRefreshKey,
+        refreshKey,
+      }}
     >
       {children}
     </AlbumContext.Provider>

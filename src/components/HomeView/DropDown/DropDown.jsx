@@ -6,22 +6,17 @@ import React, {
   useRef,
   useContext,
 } from 'react';
-import { AlbumContext } from '../../context/AlbumProvider';
-import CustomButton from './CustomButton';
+import { AlbumContext } from '../../../context/AlbumProvider';
+import CustomButton from '../SharedComponents/CustomButton';
 import './DropDown.css';
 
 const DropDown = ({ dropDownListArray }) => {
   const dropdownReference = useRef(null);
   const [isActive, setIsActive] = useState(false);
   const [dropDownSelection, setDropDownSelection] = useState({});
-  const [
-    albums,
-    setAlbums,
-    filteredAlbums,
-    RefreshAlbums,
-    groups,
-    GroupSelected,
-  ] = useContext(AlbumContext);
+  const {
+    setCurrentGroup,
+  } = useContext(AlbumContext);
 
   useEffect(() => {
     const pageClickEvent = (e) => {
@@ -44,7 +39,7 @@ const DropDown = ({ dropDownListArray }) => {
       groupId: group.groupId,
       groupName: group.groupName,
     });
-    GroupSelected(group.groupId);
+    setCurrentGroup(group);
     setIsActive(!isActive);
   };
 
@@ -55,11 +50,26 @@ const DropDown = ({ dropDownListArray }) => {
     >
       <CustomButton
         clickHandler={() => setIsActive(!isActive)}
-        className="dropdown-button-override"
+        size="large"
       >
         {dropDownSelection.groupName ? dropDownSelection.groupName : 'Select Group!'}
       </CustomButton>
       <ul className={isActive ? 'dropdown-list active' : 'dropdown-list inactive'}>
+        <li
+          className="dropdown-list-item"
+        >
+          <span
+            role="button"
+            onClick={() => dropDownSelectionHandler({
+              groupId: 'all',
+              groupName: 'My Albums',
+            })}
+            onKeyDown={() => true}
+            tabIndex="0"
+          >
+            My Albums!
+          </span>
+        </li>
         {dropDownListArray.map((group) => (
           <li
             className="dropdown-list-item"

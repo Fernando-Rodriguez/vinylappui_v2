@@ -1,5 +1,5 @@
 import React from 'react';
-import Stars from '../../../SharedComponents/Stars';
+import Stars from '../../Star/Stars';
 import './MoreInfo.css';
 
 const MoreInfo = ({ album }) => (

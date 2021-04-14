@@ -7,11 +7,12 @@ const CustomButton = (
     children,
     theme,
     customStyle,
+    size,
   },
 ) => (
   <button
     type="button"
-    className={`button-container ${customStyle} ${theme}`}
+    className={`${size} ${customStyle} ${theme} button-container`}
     onClick={clickHandler}
   >
     {children}

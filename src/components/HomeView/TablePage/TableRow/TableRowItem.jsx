@@ -1,18 +1,14 @@
 /* eslint-disable no-unused-vars */
 import React, { useContext, useState } from 'react';
-import { AlbumMethodContext } from '../../../context/AlbumMethodProvider';
-import { UserContext } from '../../../context/UserProvider';
+import { AlbumMethodContext } from '../../../../context/AlbumMethodProvider';
+import { UserContext } from '../../../../context/UserProvider';
 import CustomButton from '../../SharedComponents/CustomButton';
 import EditOptions from '../EditOptions/EditOptions';
 import './TableRowItem.css';
 
 const TableRowItem = ({ album }) => {
-  const [
-    addAlbumHandler,
-    deleteAlbumHandler,
-    updateAlbumHandler,
-  ] = useContext(AlbumMethodContext);
-  const [currentUser] = useContext(UserContext);
+  const { deleteAlbumHandler } = useContext(AlbumMethodContext);
+  const { currentUser } = useContext(UserContext);
 
   const [isOpen, setIsOpen] = useState(false);
 
