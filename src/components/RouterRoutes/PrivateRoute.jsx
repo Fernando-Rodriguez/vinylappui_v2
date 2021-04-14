@@ -1,15 +1,12 @@
 /* eslint-disable no-unused-vars */
 import React, { useContext } from 'react';
 import { Route, Redirect } from 'react-router-dom';
-import { UserContext } from '../../../context/UserProvider';
+import { UserContext } from '../../context/UserProvider';
 
 const PrivateRoute = ({ children, ...rest }) => {
-  const [
-    currentUser,
+  const {
     token,
-    SignInHandler,
-    SignOutHandler,
-  ] = useContext(UserContext);
+  } = useContext(UserContext);
 
   return (
     <Route

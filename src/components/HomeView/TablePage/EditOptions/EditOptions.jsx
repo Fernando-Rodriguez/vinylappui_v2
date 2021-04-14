@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React, { useContext, useState } from 'react';
-import { AlbumMethodContext } from '../../../context/AlbumMethodProvider';
-import { UserContext } from '../../../context/UserProvider';
+import { AlbumMethodContext } from '../../../../context/AlbumMethodProvider';
+import { UserContext } from '../../../../context/UserProvider';
 import './EditOptions.css';
 
 const EditOptions = ({ album, openHandler }) => {
@@ -9,13 +9,9 @@ const EditOptions = ({ album, openHandler }) => {
   const [albumName, setAlbum] = useState(album.album);
   const [ratingItem, setRating] = useState(album.rating);
   // eslint-disable-next-line no-unused-vars
-  const [
-    addAlbumHandler,
-    deleteAlbumHandler,
-    updateAlbumHandler,
-  ] = useContext(AlbumMethodContext);
+  const { updateAlbumHandler } = useContext(AlbumMethodContext);
 
-  const [currentUser] = useContext(UserContext);
+  const { currentUser } = useContext(UserContext);
 
   const albumChangeHandler = async (id) => {
     const { userName, userId } = currentUser;

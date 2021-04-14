@@ -3,16 +3,14 @@
 /* eslint-disable no-unused-vars */
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { UserContext } from '../../context/UserProvider';
+import { UserContext } from '../../../context/UserProvider';
 import './NavBar.css';
 
 const NavBar = () => {
-  const [
+  const {
     currentUser,
-    token,
-    SignInHandler,
     SignOutHandler,
-  ] = useContext(UserContext);
+  } = useContext(UserContext);
 
   const imageIURL = 'https://images.pexels.com/photos/1616470/pexels-photo-1616470.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260';
 

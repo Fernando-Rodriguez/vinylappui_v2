@@ -6,14 +6,18 @@ export const AlbumMethodContext = createContext();
 
 // eslint-disable-next-line react/prop-types
 const AlbumMethodProvider = ({ children }) => {
-  const [albums, setAlbums] = useContext(AlbumContext);
+  const {
+    albums,
+    setAlbums,
+    setRefreshKey,
+    refreshKey,
+  } = useContext(AlbumContext);
 
   const addAlbumHandler = async (album) => {
     if (album !== null) {
       try {
         await ApiService.postDataAsync(album);
-        const albumResults = await ApiService.getDataAsync();
-        setAlbums(albumResults);
+        setRefreshKey(!refreshKey);
       } catch (err) {
         // eslint-disable-next-line no-console
         console.log(err.ToString());
@@ -53,10 +57,11 @@ const AlbumMethodProvider = ({ children }) => {
   };
 
   return (
-    <AlbumMethodContext.Provider value={[
+    <AlbumMethodContext.Provider value={{
       addAlbumHandler,
       deleteAlbumHandler,
-      updateAlbumHandler]}
+      updateAlbumHandler,
+    }}
     >
       {children}
     </AlbumMethodContext.Provider>

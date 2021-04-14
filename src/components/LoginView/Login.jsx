@@ -1,18 +1,14 @@
 /* eslint-disable no-unused-vars */
 import React, { useContext, useState } from 'react';
 import { UserContext } from '../../context/UserProvider';
-import CustomButton from '../SharedComponents/CustomButton';
+import CustomButton from '../HomeView/SharedComponents/CustomButton';
 import './Login.css';
 
 const Login = () => {
-  const [
-    currentUser,
-    token,
+  const {
     SignInHandler,
-    SignOutHandler,
-    SetUser,
     UserCreation,
-  ] = useContext(UserContext);
+  } = useContext(UserContext);
 
   const [userInput, setUserInput] = useState('');
   const [passInput, setPassInput] = useState('');
