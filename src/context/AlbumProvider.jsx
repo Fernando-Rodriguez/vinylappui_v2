@@ -12,29 +12,12 @@ export const AlbumContext = createContext();
 
 // eslint-disable-next-line react/prop-types
 const AlbumProvider = ({ children }) => {
-  const [search] = useContext(SearchContext);
   const [albums, setAlbums] = useState([]);
-
-  // CORE ALBUMS DOES NOT GET MUTATED - EVER ------
   const [coreAlbums, setCoreAlbums] = useState([]);
-  // DO NOT TOUCH ---------------------------------
-
   const [groups, setGroups] = useState([]);
   const [currentGroup, setCurrentGroup] = useState('');
   const [refreshKey, setRefreshKey] = useState(false);
-
-  // const RefreshAlbums = async () => {
-  //   try {
-  //     const dbAlbums = await VinylApiService.getDataAsync();
-  //     const dbGroup = await VinylApiService.getGroupData();
-  //     console.log(dbGroup);
-  //     setAlbums(dbAlbums);
-  //     setCoreAlbums(dbAlbums);
-  //     setGroups(dbGroup);
-  //   } catch (err) {
-  //     console.log(err.toString());
-  //   }
-  // };
+  const [search] = useContext(SearchContext);
 
   useEffect(() => {
     const RefreshAlbums = async () => {

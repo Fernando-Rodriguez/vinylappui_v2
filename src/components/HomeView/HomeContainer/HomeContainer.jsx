@@ -2,15 +2,13 @@
 import React, { useContext, useEffect } from 'react';
 import { Route, Switch, useRouteMatch } from 'react-router-dom';
 import { AlbumContext } from '../../../context/AlbumProvider';
-import { UserContext } from '../../../context/UserProvider';
-
 import MainFooter from '../MainFooter/MainFooter';
 import NavBar from '../NavBar/NavBar';
 import SearchBody from '../SearchBody/SearchBody';
 import SearchBar from '../SearchBar/SearchBar';
 import TablePage from '../TablePage/TablePage';
 
-import './SearchPage.css';
+import './HomeContainer.css';
 
 // This will work as the main container for the searchpage.
 const HomeContainer = () => {

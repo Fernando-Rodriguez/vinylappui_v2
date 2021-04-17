@@ -6,12 +6,12 @@ import {
   Switch,
   Route,
 } from 'react-router-dom';
-import SearchPage from '../HomeView/SearchPage/SearchPage';
+import HomeContainer from '../HomeView/HomeContainer/HomeContainer';
 import UserProvider from '../../context/UserProvider';
 import AlbumProvider from '../../context/AlbumProvider';
 import AlbumMethodProvider from '../../context/AlbumMethodProvider';
 import SearchProvider from '../../context/SearchContext';
-import PrivateRoute from '../HomeView/RouterRoutes/PrivateRoute';
+import PrivateRoute from '../RouterRoutes/PrivateRoute';
 import Login from '../LoginView/Login';
 import VinylApiService from '../../services/api.service';
 
@@ -33,7 +33,7 @@ const App = () => {
               <SearchProvider>
                 <AlbumProvider>
                   <AlbumMethodProvider>
-                    <SearchPage />
+                    <HomeContainer />
                   </AlbumMethodProvider>
                 </AlbumProvider>
               </SearchProvider>
