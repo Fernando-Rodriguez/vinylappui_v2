@@ -1,11 +1,3 @@
-:root {
-  --light-primary: #60495A;
-  --med-primary: #3F3244;
-  --dark-primary: #2F2235;
-  --light-secondary: #BFC3BA;
-  --dark-dark: #A9ACA9;
-}
-
 .dropdown-container {
   height: 100%;
   width: 10%;
@@ -16,14 +8,15 @@
 }
 
 .dropdown-list {
-  top: 80%;
-  right: 0px;
+  top: 85%;
+  right: 18%;
   width: 200px;
   z-index: 10;
   background-color: var(--light-secondary);
   position: absolute;
   display: flex;
   flex-direction: column;
+  box-shadow:0 0 5px var(--light-primary);
 }
 
 .inactive {

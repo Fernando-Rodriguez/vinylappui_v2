@@ -1,11 +1,3 @@
-:root {
-  --light-primary: #60495A;
-  --med-primary: #3F3244 ;
-  --dark-primary: #2F2235;
-  --light-secondary: #BFC3BA;
-  --dark-dark: #A9ACA9;
-}
-
 .button-container {
   width: 50%;
   height: 10%;
