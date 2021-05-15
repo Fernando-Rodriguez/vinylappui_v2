@@ -1,11 +1,3 @@
-:root {
-    --light-primary: #60495A;
-    --med-primary: #3F3244 ;
-    --dark-primary: #2F2235;
-    --light-secondary: #BFC3BA;
-    --dark-dark: #A9ACA9;
-}
-
 .login-container {
     width: 100%;
     height: 100%;
@@ -82,7 +74,7 @@
 }
 
 .input-field-container:focus-within {
-    box-shadow: 0 0 10px #2F2235;
+    box-shadow: 0 0 10px var(--dark-primary);
     background-color: var(--dark-primary);
 }
 

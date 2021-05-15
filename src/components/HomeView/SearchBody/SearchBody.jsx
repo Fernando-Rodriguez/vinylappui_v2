@@ -16,9 +16,9 @@ const SearchBody = ({ album }) => {
     );
   }
 
-  return (
+  const albumArray = (userAlbums) => (
     <div className="searchbody-container">
-      {album.map((dBalbum) => (
+      {userAlbums.map((dBalbum) => (
         <AlbumCard
           className="searchbody-cell"
           album={dBalbum}
@@ -27,6 +27,10 @@ const SearchBody = ({ album }) => {
         />
       ))}
     </div>
+  );
+
+  return (
+    albumArray(album)
   );
 };
 
