@@ -8,7 +8,6 @@ const EditOptions = ({ album, openHandler }) => {
   const [artistName, setArtist] = useState(album.artist);
   const [albumName, setAlbum] = useState(album.album);
   const [ratingItem, setRating] = useState(album.rating);
-  // eslint-disable-next-line no-unused-vars
   const { updateAlbumHandler } = useContext(AlbumMethodContext);
 
   const { currentUser } = useContext(UserContext);
@@ -17,13 +16,14 @@ const EditOptions = ({ album, openHandler }) => {
     const { userName, userId } = currentUser;
 
     const newAlbum = {
+      id,
       user: userName,
       album: albumName,
       artist: artistName,
       rating: parseInt(ratingItem, 10),
     };
 
-    await updateAlbumHandler(userId, id, newAlbum);
+    await updateAlbumHandler(newAlbum);
 
     openHandler();
   };
@@ -64,7 +64,7 @@ const EditOptions = ({ album, openHandler }) => {
         <div className="edit-img-container">
           <img src={album.imageUrl} alt="Album Artwork" />
         </div>
-        <button type="button" onClick={() => albumChangeHandler(album.id)}>
+        <button type="button" onClick={() => albumChangeHandler(album.idString)}>
           Save Changes
         </button>
       </div>

@@ -22,7 +22,7 @@ const SearchBody = ({ album }) => {
         <AlbumCard
           className="searchbody-cell"
           album={dBalbum}
-          key={dBalbum.id}
+          key={`${dBalbum.idString}-${dBalbum.user}`}
           clickHandler={clickHandler}
         />
       ))}

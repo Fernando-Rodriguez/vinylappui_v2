@@ -20,6 +20,7 @@ const AddAlbum = ({ closeHandler }) => {
         artist: artistName,
         album: albumName,
         user: currentUser.userName,
+        rating: 0,
       });
       setArtistName('');
       setAlbumName('');

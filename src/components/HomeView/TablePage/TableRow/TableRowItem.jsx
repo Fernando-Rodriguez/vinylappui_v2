@@ -24,7 +24,7 @@ const TableRowItem = ({ album }) => {
       <p className="row-item">
         <CustomButton
           type="button"
-          clickHandler={() => deleteAlbumHandler(album.id)}
+          clickHandler={() => deleteAlbumHandler(album.idString)}
         >
           Delete
         </CustomButton>
