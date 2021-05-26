@@ -1,59 +1,59 @@
-import React, { createContext, useEffect, useState } from 'react';
+/* eslint-disable no-console */
+import React, { createContext, useState } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
-import VinylApiService from '../services/api.service';
-import TokenService from '../services/token.service';
-import UserService from '../services/user.service';
+import UserModel from '../models/userModel';
+import tokenApi from '../services/ApiEndpoints/TokenApi.service';
+import userApi from '../services/ApiEndpoints/UserApi.service';
 
 export const UserContext = createContext();
 
 // eslint-disable-next-line react/prop-types
 const UserProvider = ({ children }) => {
-  const existingToken = TokenService.getToken();
-
-  const [token, setToken] = useState(() => {
-    if (existingToken) {
-      return existingToken;
-    }
-    return null;
-  });
-  const [currentUser, setCurrentUser] = useState({});
+  const [currentUser, setCurrentUser] = useState(new UserModel());
 
   const history = useHistory();
   const location = useLocation();
   const { from } = location.state || { from: { pathname: '/' } };
 
-  useEffect(() => {
-    const SetUser = async () => {
-      const user = await VinylApiService.getUserInfo();
-      setCurrentUser(user);
-    };
-    SetUser();
-  }, [token]);
-
-  const SignInHandler = async (email, password) => {
-    if (!token) {
-      const userToken = await UserService.login(email, password);
-      setToken(userToken);
-      history.replace(from);
-    }
+  const GetCurrentUser = async () => {
+    console.log('getting user');
+    const user = await userApi.getCurrentUser();
+    const newCurrentUser = new UserModel(
+      user.userName,
+      user.userId,
+    );
+    setCurrentUser(newCurrentUser);
   };
 
-  const SignOutHandler = () => {
-    TokenService.removeToken();
-    setToken(null);
+  const SignInHandler = async (email, password) => {
+    await tokenApi.post({
+      userName: email,
+      userSecret: password,
+    });
+    await GetCurrentUser();
+    history.replace(from);
+  };
+
+  const SignOutHandler = async () => {
+    await tokenApi.logout();
+    history.replace('/login');
+    setCurrentUser(new UserModel());
   };
 
   const UserCreation = async (email, password) => {
-    await UserService.createUser(email, password);
+    await userApi.post({
+      userName: email,
+      userSecret: password,
+    });
   };
 
   return (
     <UserContext.Provider value={{
       currentUser,
-      token,
       SignInHandler,
       SignOutHandler,
       UserCreation,
+      GetCurrentUser,
     }}
     >
       {children}

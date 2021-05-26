@@ -22,7 +22,7 @@ const TablePage = () => {
       return (
         <div className="table-row-body">
           {albums.map((album) => (
-            <TableRowItem key={album.id} album={album} />
+            <TableRowItem key={album.idString} album={album} />
           ))}
         </div>
       );

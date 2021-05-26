@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { Route, Switch, useRouteMatch } from 'react-router-dom';
 import { AlbumContext } from '../../../context/AlbumProvider';
 import MainFooter from '../MainFooter/MainFooter';

@@ -14,8 +14,8 @@ const NavBar = () => {
 
   const imageIURL = 'https://images.pexels.com/photos/1616470/pexels-photo-1616470.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260';
 
-  const clickHandler = () => {
-    SignOutHandler();
+  const clickHandler = async () => {
+    await SignOutHandler();
   };
 
   return (

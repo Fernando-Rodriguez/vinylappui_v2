@@ -5,8 +5,9 @@ import React, {
   useEffect,
   useState,
 } from 'react';
-import VinylApiService from '../services/api.service';
 import { SearchContext } from './SearchContext';
+import groupApi from '../services/ApiEndpoints/GroupApi.service';
+import albumApi from '../services/ApiEndpoints/AlbumApi.service';
 
 export const AlbumContext = createContext();
 
@@ -22,11 +23,10 @@ const AlbumProvider = ({ children }) => {
   useEffect(() => {
     const RefreshAlbums = async () => {
       try {
-        const dbAlbums = await VinylApiService.getDataAsync();
-        const dbGroup = await VinylApiService.getGroupData();
-        console.log(dbGroup);
-        setAlbums(dbAlbums);
-        setCoreAlbums(dbAlbums);
+        const dbAlbums = await albumApi.getAll();
+        const dbGroup = await groupApi.getAll();
+        setAlbums(dbAlbums.owned_Albums);
+        setCoreAlbums(dbAlbums.owned_Albums);
         setGroups(dbGroup);
       } catch (err) {
         console.log(err.toString());
@@ -37,13 +37,13 @@ const AlbumProvider = ({ children }) => {
 
   useEffect(() => {
     try {
-      if (currentGroup.groupId === 'all') {
-        setAlbums(coreAlbums);
-      } else {
+      if (currentGroup.groupId !== 'all') {
         const filteredGroup = groups.filter((group) => group.groupId === currentGroup.groupId);
         const addGroupAlbums = filteredGroup[0].groupAlbums;
         const newAlbumList = [...coreAlbums, ...addGroupAlbums];
         setAlbums(newAlbumList);
+      } else {
+        setAlbums(coreAlbums);
       }
     } catch (err) {
       console.log(err.toString());

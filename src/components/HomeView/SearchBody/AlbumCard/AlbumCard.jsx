@@ -5,7 +5,7 @@ import './AlbumCard.css';
 const AlbumCard = ({ album, clickHandler }) => {
   const onKeyDownHandler = (e) => {
     if (e.key === 'Enter') {
-      clickHandler(album.id);
+      clickHandler(album.idString);
     }
   };
 
@@ -33,7 +33,7 @@ const AlbumCard = ({ album, clickHandler }) => {
         tabIndex="0"
         onKeyDown={onKeyDownHandler}
       >
-        <MoreInfo album={album} clickHandler={() => clickHandler(album.id)} />
+        <MoreInfo album={album} clickHandler={() => clickHandler(album.idString)} />
       </div>
     </div>
   );
