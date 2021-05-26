@@ -1,6 +1,7 @@
 /* eslint-disable no-console */
 import React, { createContext, useState } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
+import UserModel from '../models/userModel';
 import tokenApi from '../services/ApiEndpoints/TokenApi.service';
 import userApi from '../services/ApiEndpoints/UserApi.service';
 
@@ -8,7 +9,7 @@ export const UserContext = createContext();
 
 // eslint-disable-next-line react/prop-types
 const UserProvider = ({ children }) => {
-  const [currentUser, setCurrentUser] = useState(null);
+  const [currentUser, setCurrentUser] = useState(new UserModel());
 
   const history = useHistory();
   const location = useLocation();
@@ -17,7 +18,11 @@ const UserProvider = ({ children }) => {
   const GetCurrentUser = async () => {
     console.log('getting user');
     const user = await userApi.getCurrentUser();
-    setCurrentUser(user);
+    const newCurrentUser = new UserModel(
+      user.userName,
+      user.userId,
+    );
+    setCurrentUser(newCurrentUser);
   };
 
   const SignInHandler = async (email, password) => {
@@ -32,7 +37,7 @@ const UserProvider = ({ children }) => {
   const SignOutHandler = async () => {
     await tokenApi.logout();
     history.replace('/login');
-    setCurrentUser(null);
+    setCurrentUser(new UserModel());
   };
 
   const UserCreation = async (email, password) => {

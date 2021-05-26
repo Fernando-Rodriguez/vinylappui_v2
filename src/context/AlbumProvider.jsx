@@ -37,13 +37,13 @@ const AlbumProvider = ({ children }) => {
 
   useEffect(() => {
     try {
-      if (currentGroup.groupId === 'all') {
-        setAlbums(coreAlbums);
-      } else {
+      if (currentGroup.groupId !== 'all') {
         const filteredGroup = groups.filter((group) => group.groupId === currentGroup.groupId);
         const addGroupAlbums = filteredGroup[0].groupAlbums;
         const newAlbumList = [...coreAlbums, ...addGroupAlbums];
         setAlbums(newAlbumList);
+      } else {
+        setAlbums(coreAlbums);
       }
     } catch (err) {
       console.log(err.toString());

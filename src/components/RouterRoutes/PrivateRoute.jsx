@@ -12,7 +12,7 @@ const PrivateRoute = ({ children, ...rest }) => {
 
   useEffect(() => {
     const AttemptToGetUser = async () => {
-      if (currentUser == null) {
+      if (currentUser.userId == null || '') {
         try {
           await GetCurrentUser();
           return currentUser;

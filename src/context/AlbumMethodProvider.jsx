@@ -1,6 +1,5 @@
 import React, { createContext, useContext } from 'react';
 import { AlbumContext } from './AlbumProvider';
-// import ApiService from '../../../Depreciated/api.service';
 import albumApi from '../services/ApiEndpoints/AlbumApi.service';
 
 export const AlbumMethodContext = createContext();
