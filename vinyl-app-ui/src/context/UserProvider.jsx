@@ -10,13 +10,11 @@ export const UserContext = createContext();
 // eslint-disable-next-line react/prop-types
 const UserProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(new UserModel());
-
   const history = useHistory();
   const location = useLocation();
   const { from } = location.state || { from: { pathname: '/' } };
 
   const GetCurrentUser = async () => {
-    console.log('getting user');
     const user = await userApi.getCurrentUser();
     const newCurrentUser = new UserModel(
       user.userName,

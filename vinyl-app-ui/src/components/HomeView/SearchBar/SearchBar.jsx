@@ -9,10 +9,6 @@ import './SearchBar.css';
 const SearchBar = () => {
   const [search, setSearch] = useContext(SearchContext);
 
-  const {
-    groups,
-  } = useContext(AlbumContext);
-
   const debouncedInputHandler = debounce1((values) => {
     setSearch(values);
   }, 500);
@@ -29,7 +25,7 @@ const SearchBar = () => {
           }}
         />
       </div>
-      <DropDown dropDownListArray={groups} />
+      <DropDown />
     </div>
   );
 };

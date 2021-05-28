@@ -10,12 +10,13 @@ import { AlbumContext } from '../../../context/AlbumProvider';
 import CustomButton from '../SharedComponents/CustomButton';
 import './DropDown.css';
 
-const DropDown = ({ dropDownListArray }) => {
+const DropDown = () => {
   const dropdownReference = useRef(null);
   const [isActive, setIsActive] = useState(false);
   const [dropDownSelection, setDropDownSelection] = useState({});
   const {
     setCurrentGroup,
+    groups,
   } = useContext(AlbumContext);
 
   useEffect(() => {
@@ -23,7 +24,6 @@ const DropDown = ({ dropDownListArray }) => {
       if (dropdownReference.current !== null && !dropdownReference.current.contains(e.target)) {
         setIsActive(!isActive);
       }
-      console.log(e);
     };
 
     if (isActive) {
@@ -70,7 +70,7 @@ const DropDown = ({ dropDownListArray }) => {
             My Albums!
           </span>
         </li>
-        {dropDownListArray.map((group) => (
+        {groups.map((group) => (
           <li
             className="dropdown-list-item"
             key={group.groupId}

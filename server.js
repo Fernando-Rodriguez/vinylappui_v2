@@ -1,8 +1,9 @@
 const path = require("path");
-var cors = require('cors')
+var cors = require('cors');
 const express = require('express');
 const https = require('https');
 const fs = require('fs');
+const birds = require('./routes/routes');
 const port = 3000;
 
 // Generates the cert for https
@@ -20,6 +21,8 @@ app.use(express.static(path.join(__dirname, 'vinyl-app-ui/build')));
 app.use((req, res, next) => {
   res.sendFile(path.join(__dirname, 'vinyl-app-ui/build'));
 });
+
+app.use('/api/birds', birds)
 
 app.get('*', function (req, res) {
   res.sendFile(path.join(__dirname, 'vinyl-app-ui/build/index.html'));

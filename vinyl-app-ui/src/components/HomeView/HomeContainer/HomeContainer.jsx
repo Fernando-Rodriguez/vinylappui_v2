@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Route, Switch, useRouteMatch } from 'react-router-dom';
 import { AlbumContext } from '../../../context/AlbumProvider';
 import MainFooter from '../MainFooter/MainFooter';
@@ -14,7 +14,14 @@ import './HomeContainer.css';
 const HomeContainer = () => {
   const {
     albums,
+    setRefreshKey,
+    refreshKey,
+    RefreshAlbums,
   } = useContext(AlbumContext);
+
+  useEffect(() => {
+    RefreshAlbums();
+  }, []);
 
   const { path } = useRouteMatch();
 

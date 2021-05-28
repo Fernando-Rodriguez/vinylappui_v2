@@ -1,5 +1,6 @@
 import React, { createContext, useContext } from 'react';
 import { AlbumContext } from './AlbumProvider';
+import AlbumModel from '../models/albumModel';
 import albumApi from '../services/ApiEndpoints/AlbumApi.service';
 
 export const AlbumMethodContext = createContext();
@@ -15,35 +16,25 @@ const AlbumMethodProvider = ({ children }) => {
 
   const addAlbumHandler = async (album) => {
     if (album !== null) {
-      try {
-        await albumApi.post(album);
-        // await ApiService.postDataAsync(album);
-        setRefreshKey(!refreshKey);
-      } catch (err) {
-        // eslint-disable-next-line no-console
-        console.log(err);
-      }
+      const newAlbum = new AlbumModel(
+        album.user,
+        album.album,
+        album.artist,
+        album.imageUrl,
+        album.rating,
+      );
+      await albumApi.post(newAlbum);
+      setRefreshKey(!refreshKey);
     }
   };
+
   const deleteAlbumHandler = async (id) => {
-    if (id !== null) {
-      try {
-        // await ApiService.deleteDataAsync(id);
-        const filteredAlbums = albums.filter((album) => {
-          if (album.idString !== id) {
-            return album;
-          }
-          return null;
-        });
-        setAlbums(filteredAlbums);
-      } catch (err) {
-        // eslint-disable-next-line no-console
-        console.log(err.ToString());
-      }
-    }
+    if (id === null) return;
+    const filteredAlbums = albums.filter((album) => album.idString !== id);
+    setAlbums(filteredAlbums);
   };
+
   const updateAlbumHandler = async (changes) => {
-    /// await ApiService.updateDataAsync(userId, id, changes);
     await albumApi.put(changes);
     const newList = albums.map((album) => {
       if (album.idString === changes.id) {

@@ -15,42 +15,38 @@ export const AlbumContext = createContext();
 const AlbumProvider = ({ children }) => {
   const [albums, setAlbums] = useState([]);
   const [coreAlbums, setCoreAlbums] = useState([]);
-  const [groups, setGroups] = useState([]);
-  const [currentGroup, setCurrentGroup] = useState('');
+  const [groups, setGroups] = useState([{
+    groupId: 'all',
+    groupName: 'My Albums',
+  }]);
+  const [currentGroup, setCurrentGroup] = useState({
+    groupId: 'all',
+    groupName: 'My Albums',
+  });
   const [refreshKey, setRefreshKey] = useState(false);
   const [search] = useContext(SearchContext);
 
-  useEffect(() => {
-    const RefreshAlbums = async () => {
-      try {
-        const dbAlbums = await albumApi.getAll();
-        const dbGroup = await groupApi.getAll();
-        setAlbums(dbAlbums.owned_Albums);
-        setCoreAlbums(dbAlbums.owned_Albums);
-        setGroups(dbGroup);
-      } catch (err) {
-        console.log(err.toString());
-      }
-    };
-    RefreshAlbums();
-  }, [refreshKey]);
+  const RefreshAlbums = async () => {
+    const dbAlbums = await albumApi.getAll();
+    const dbGroup = await groupApi.getAll();
+    setAlbums(dbAlbums.owned_Albums);
+    setCoreAlbums(dbAlbums.owned_Albums);
+    setGroups(dbGroup);
+  };
 
-  useEffect(() => {
-    try {
-      if (currentGroup.groupId !== 'all') {
-        const filteredGroup = groups.filter((group) => group.groupId === currentGroup.groupId);
-        const addGroupAlbums = filteredGroup[0].groupAlbums;
-        const newAlbumList = [...coreAlbums, ...addGroupAlbums];
-        setAlbums(newAlbumList);
-      } else {
-        setAlbums(coreAlbums);
-      }
-    } catch (err) {
-      console.log(err.toString());
+  const updateGroups = () => {
+    if (currentGroup.groupId !== 'all') {
+      const filteredGroup = groups.filter((group) => group.groupId === currentGroup.groupId);
+      console.log(filteredGroup);
+      const addGroupAlbums = filteredGroup[0].groupAlbums;
+      const newAlbumList = [...coreAlbums, ...addGroupAlbums];
+      setAlbums(newAlbumList);
+    } else {
+      setAlbums(coreAlbums);
     }
-  }, [currentGroup]);
+  };
 
-  useEffect(() => {
+  const updateAlbumListWithFilter = () => {
     if (search !== '') {
       const list = albums.filter((album) => {
         const inputToLower = search.toLowerCase();
@@ -62,6 +58,14 @@ const AlbumProvider = ({ children }) => {
       setAlbums(list);
     }
     return () => setAlbums(coreAlbums);
+  };
+
+  useEffect(() => {
+    updateGroups();
+  }, [currentGroup]);
+
+  useEffect(() => {
+    updateAlbumListWithFilter();
   }, [search]);
 
   return (
@@ -74,6 +78,7 @@ const AlbumProvider = ({ children }) => {
         currentGroup,
         setRefreshKey,
         refreshKey,
+        RefreshAlbums,
       }}
     >
       {children}
