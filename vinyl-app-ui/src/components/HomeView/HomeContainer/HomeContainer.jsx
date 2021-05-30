@@ -9,13 +9,11 @@ import SearchBar from '../SearchBar/SearchBar';
 import TablePage from '../TablePage/TablePage';
 
 import './HomeContainer.css';
+import useAlbums from '../../../hooks/useAlbums';
 
 // This will work as the main container for the searchpage.
 const HomeContainer = () => {
   const {
-    albums,
-    setRefreshKey,
-    refreshKey,
     RefreshAlbums,
   } = useContext(AlbumContext);
 
@@ -23,6 +21,7 @@ const HomeContainer = () => {
     RefreshAlbums();
   }, []);
 
+  const albums = useAlbums();
   const { path } = useRouteMatch();
 
   return (
