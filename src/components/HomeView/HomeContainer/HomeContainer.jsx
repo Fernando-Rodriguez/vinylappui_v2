@@ -13,17 +13,8 @@ import useAlbums from '../../../hooks/useAlbums';
 
 // This will work as the main container for the searchpage.
 const HomeContainer = () => {
-  const {
-    RefreshAlbums,
-  } = useContext(AlbumContext);
-
-  useEffect(() => {
-    RefreshAlbums();
-  }, []);
-
   const albums = useAlbums();
   const { path } = useRouteMatch();
-
   return (
     <div className="search-page-container">
       <div className="search-page-navbar">

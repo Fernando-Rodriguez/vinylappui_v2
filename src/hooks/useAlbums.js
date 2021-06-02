@@ -7,15 +7,15 @@ const useFilteredAlbums = () => {
     albums,
     groups,
     currentGroup,
+    RefreshAlbums,
   } = useContext(AlbumContext);
 
   const [search] = useContext(SearchContext);
-  // const [filteredAlbums, setFilteredAlbums] = useState(albums);
   const [localAlbums, setLocalAlbums] = useState(albums);
 
-  useEffect(() => {
+  const SetAlbums = () => {
     setLocalAlbums(albums);
-    if (currentGroup.groupId !== 'all' || '') {
+    if (currentGroup.groupId !== 'all' || '' || null) {
       const filteredGroup = groups.filter((group) => group.groupId === currentGroup.groupId);
       const addGroupAlbums = filteredGroup[0].groupAlbums;
       const newAlbumList = [...albums, ...addGroupAlbums];
@@ -31,8 +31,15 @@ const useFilteredAlbums = () => {
       });
       setLocalAlbums(list);
     }
-  }, [currentGroup, search]);
+  };
 
+  useEffect(() => {
+    RefreshAlbums();
+  }, []);
+
+  useEffect(() => {
+    SetAlbums();
+  }, [currentGroup, search]);
   return localAlbums;
 };
 
