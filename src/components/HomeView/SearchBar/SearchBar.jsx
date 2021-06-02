@@ -1,6 +1,5 @@
 /* eslint-disable no-unused-vars */
 import React, { useContext } from 'react';
-import { AlbumContext } from '../../../context/AlbumProvider';
 import { SearchContext } from '../../../context/SearchContext';
 import debounce1 from '../../../services/Utilities/Debouncer';
 import DropDown from '../DropDown/DropDown';

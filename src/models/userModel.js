@@ -7,5 +7,4 @@ class UserModel {
     this.userId = userId;
   }
 }
-
 export default UserModel;
